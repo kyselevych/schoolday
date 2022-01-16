@@ -1,0 +1,26 @@
+.error-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &__text {
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+        background: #ff2942;
+        color: #fff;
+    }
+    
+    &__line {
+        width: 100%;
+        height: 5px;
+        background: #b91a2c;
+    }
+
+    &__line-active {
+        background: #fff;
+        height: 100%;
+        width: 100%;
+    }
+}

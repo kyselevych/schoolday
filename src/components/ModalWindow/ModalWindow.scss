@@ -1,0 +1,57 @@
+@use 'src/styles/variables' as *;
+
+.modal-window {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.3);
+    backdrop-filter: blur(5px);
+
+    &__block {
+        width: max-content;
+        min-width: 450px;
+        border-radius: 25px;
+        overflow: hidden;
+    }
+
+    &__header {
+        position: relative;
+        padding: 1em 0;
+        color: #fff;
+        background: $main-gradient;
+        text-align: center;
+    }
+    
+    &__close-btn {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        right: 20px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: #fff;
+        mask-image: url('../../assets/icons/close.svg');
+        mask-size: contain;
+        mask-position: center;
+        transition: $transition;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $accent-color;
+        }
+
+    }
+
+    &__content {
+        padding: 40px 35px;
+        color: $text-dark-color;
+        background-color: $bg-contrast-color;
+    }
+}

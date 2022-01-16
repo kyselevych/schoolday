@@ -1,0 +1,37 @@
+@use 'src/styles/variables' as *;
+
+.button-add {
+    position: relative;
+    width: max-content;
+    padding: 20px 30px 20px 80px;
+    border-radius: 2em;
+    transition: $transition;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        top: 0;
+        bottom: 0;
+        left: 2em;
+        margin: auto;
+        background-color: #e7e6fa;
+        background-image: url('../../assets/icons/ButtonAdd/add-plus.svg');
+        background-position: center;
+        background-size: 70%;
+        transition: .5s;
+    }
+
+    &:hover {
+        background-color: $bg-contrast-color;
+        box-shadow: $main-boxShadow;
+    }
+
+    &:hover:before {
+        transform: rotate(180deg);
+    }
+}

@@ -1,0 +1,35 @@
+@use 'src/styles/variables' as *;
+
+$positive-color: #61b94f;
+$negative-color: #e94545;
+
+.button-decision {
+    width: max-content;
+    min-width: 200px;
+    padding: 1em;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    text-align: center;
+    transition: $transition;
+    cursor: pointer;
+
+    &--positive {
+        border-color: $positive-color;
+        color: $positive-color;
+
+        &:hover {
+            background-color: $positive-color;
+            color: #fff;
+        }
+    }
+
+    &--negative {
+        border-color: $negative-color;
+        color: $negative-color;
+
+        &:hover {
+            background-color: $negative-color;
+            color: #fff;
+        }
+    }
+}
