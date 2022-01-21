@@ -23,6 +23,10 @@ $negative-color: #e94545;
         }
     }
 
+	&--positive + &--negative, &--negative + &--positive{
+		margin-left: 20px
+	}
+
     &--negative {
         border-color: $negative-color;
         color: $negative-color;
@@ -32,4 +36,5 @@ $negative-color: #e94545;
             color: #fff;
         }
     }
+
 }
