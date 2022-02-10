@@ -1,0 +1,44 @@
+@use '@styles/variables' as *;
+
+$color-bg-name-class: #ff8929;
+
+.classroom {
+	&__header {
+		display: flex;
+		align-items: stretch;
+		margin: 20px 0;
+		background-color: $bg-contrast-color;
+		box-shadow: $main-boxShadow;
+	}
+
+	&__name-classroom {
+		padding: 20px;
+		min-width: 300px;
+		max-width: 430px;
+		text-align: center;
+		font-size: 16px;
+		color: #fff;
+		background-color: $color-bg-name-class;
+	}
+
+	&__nav {
+		display: flex;
+		flex-grow: 1;
+		list-style: none;
+
+		&-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px 25px;
+			
+			&:hover {
+				background-color: #fff;
+			}
+		}
+
+		&-item--settings {
+			margin-left: auto;
+		}
+	}
+}
