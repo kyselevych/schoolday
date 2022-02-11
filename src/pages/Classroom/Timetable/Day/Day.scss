@@ -1,0 +1,34 @@
+@use '@styles/variables' as *;
+
+.timetable {
+	&__day {
+		width: 100%;
+		background: $bg-color;
+		box-shadow: $main-boxShadow;
+		transition: $transition;
+
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 2px 15px 5px rgba(0,0,0,0.05);
+		}
+	}
+
+	&__day-header {
+		display: flex;
+		align-items: center;
+		padding: 15px 20px;
+		overflow: hidden;
+		color: $white-color;
+		background: $dark-color;
+	}
+
+	&__day-date {
+		min-width: 50px;
+		font-size: 14px;
+		color: $text-light-color;
+	}
+
+	&__day-name {
+
+	}
+}

@@ -1,0 +1,54 @@
+@use '@styles/variables' as *;
+
+$done-color: #6fd176;
+$undone-color: #fbc623;
+
+.timetable {
+	&__lesson {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 15px 20px;
+		margin-top: 2px;
+		font-size: 14px;
+		background: $bg-contrast-color;
+		transition: $transition;
+		cursor: pointer;
+
+		&:hover {
+			background: $white-color;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			display: block;
+			top: -10px;
+			left: -10px;
+			transform: rotate(-45deg);
+			border: 10px solid transparent;
+		}
+
+		&--done::before {
+			border-bottom-color: $done-color;
+		}
+
+		&--undone::before {
+			border-bottom-color: $undone-color;
+		}
+	}
+
+	&__lesson-time {
+		display: block;
+		min-width: 50px;
+		font-size: 14px;
+		color: $text-light-color;
+	}
+
+	&__lesson-name {
+		width: auto;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+}
