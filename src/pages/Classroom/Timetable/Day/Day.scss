@@ -18,7 +18,7 @@
 		align-items: center;
 		padding: 15px 20px;
 		overflow: hidden;
-		color: $white-color;
+		color: $bg-contrast-hover-color;
 		background: $dark-color;
 	}
 
@@ -30,5 +30,22 @@
 
 	&__day-name {
 
+	}
+
+	&__add-lesson {
+		position: relative;
+		padding: 15px 20px;
+		margin-top: 2px;
+		font-size: 14px;
+		text-align: center;
+		cursor: pointer;
+		vertical-align: center;
+		background: $bg-contrast-color;
+		transition: $transition;
+
+		&:hover {
+			color: white;
+			background-color: $accent-color;
+		}
 	}
 }

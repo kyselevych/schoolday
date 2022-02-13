@@ -33,7 +33,7 @@ $color-bg-name-class: #ff8929;
 			padding: 20px 30px;
 			
 			&:hover {
-				background-color: #fff;
+				background-color: $bg-contrast-hover-color;
 			}
 		}
 

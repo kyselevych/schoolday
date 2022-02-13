@@ -9,7 +9,8 @@ function Day(props) {
 	const {
 		name,
 		date,
-		lessons
+		lessons,
+		userRole
 	} = props;
 	
 	return (
@@ -22,6 +23,9 @@ function Day(props) {
 				lessons?.map(lesson => {
 					return <Lesson name={lesson.name} time={lesson.time} status={lesson.status}/>
 				})
+			}
+			{
+				userRole === "teacher" && <div className="timetable__add-lesson">Add lesson</div>
 			}
 		</div>
 	);

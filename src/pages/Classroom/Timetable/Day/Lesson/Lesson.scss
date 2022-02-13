@@ -16,7 +16,7 @@ $undone-color: #fbc623;
 		cursor: pointer;
 
 		&:hover {
-			background: $white-color;
+			background: $bg-contrast-hover-color;
 		}
 
 		&::before {
