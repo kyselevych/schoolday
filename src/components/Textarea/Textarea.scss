@@ -1,19 +1,19 @@
 @use 'src/styles/variables' as *;
 
-.input-default {
-    height: 40px;
-    width: 100%;
-	padding-left: 25px;
+.textarea-default {
+    min-height: 100px;
+	width: 100%;
+	padding: 15px 25px;
 	border: 1px solid #e0e0e0;
 	border-radius: 10px;
 	color: $dark-color;
-    background: $bg-contrast-color;
+	background: $bg-contrast-color;
 	transition: $transition;
-    outline: none;
+	outline: none;
+	resize: none;
 
 	&:hover,
 	&:focus {
 		border-color: $dark-color;
 	}
 }
-

@@ -1,23 +1,21 @@
 import React from "react";
-import './Input.scss';
+import './Textarea.scss';
 
-function Input(props) {
+function Textarea(props) {
 	
 	const {
-		type = 'text',
 		className = '',
 		onChange = undefined,
 		placeholder = ''
 	} = props;
 	
     return (
-        <input 
-            type={type}
-            className={'input-default ' + className}
+        <textarea
+            className={'textarea-default ' + className}
             onChange={onChange}
             placeholder={placeholder}
         />
     );
 }
 
-export default Input;
+export default Textarea;

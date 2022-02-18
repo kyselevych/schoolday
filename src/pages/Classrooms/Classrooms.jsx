@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import './Classrooms.scss';
 import ListClassrooms from "./ListClassrooms/ListClassrooms";
-import {ModalWindow, ButtonAdd, ButtonDecision, Input} from '@components';
+import {ModalWindow, ButtonAdd, ButtonDecision, Input, InputLabel} from '@components';
+import Textarea from "../../components/Textarea/Textarea";
+import TextareaLabel from "../../components/TextareaLabel/TextareaLabel";
 
 function Classrooms() {
     const [isOpenModalWindow, setIsOpenModalWindow] = useState(false);
@@ -26,10 +28,7 @@ function Classrooms() {
                     title='Create new classroom'
                     onCloseClick={closeModalWindow}
                 >
-                    <div className="input-wrapper">
-                        <p className="input-label">Name of classroom</p>
-                        <Input placeholder="Name of classroom"/>
-                    </div>
+                    <InputLabel labelText="Name of class" placeholder="Name of class"/>
                     <div className="classrooms__buttons-wrapper">
                         <ButtonDecision>Create</ButtonDecision>
                         <ButtonDecision type='negative' onClick={closeModalWindow}>Cancel</ButtonDecision>
