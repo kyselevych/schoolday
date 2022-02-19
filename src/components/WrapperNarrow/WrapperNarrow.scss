@@ -1,0 +1,17 @@
+@use 'src/styles/variables' as *;
+
+.wrapper-narrow {
+	width: 750px;
+	padding: 50px 70px;
+	margin: 0 auto;
+	background-color: $bg-contrast-color;
+
+	& > *,
+	& > form > * {
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,14 +1,14 @@
 @use 'src/styles/variables' as *;
 
-.input-label {
-	display: inline-block;
-    font-size: 14px;
-    margin-bottom: 0.5em;
-	padding-left: 1em;
-}
-
-.input-wrapper {
+.label-form {
 	display: block;
 	width: 100%;
+}
+
+.label-form__text {
+	display: inline-block;
+    font-size: 16px;
+    margin-bottom: 0.5em;
+	padding-left: 1em;
 }
 

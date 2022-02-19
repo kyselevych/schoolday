@@ -10,8 +10,9 @@ $negative-color: #e94545;
     border-radius: 50px;
     border: 1px solid transparent;
     text-align: center;
-    transition: $transition;
     cursor: pointer;
+	transition: $transition;
+	background: transparent;
 
     &--positive {
         border-color: $positive-color;

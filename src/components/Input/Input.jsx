@@ -7,15 +7,19 @@ function Input(props) {
 		type = 'text',
 		className = '',
 		onChange = undefined,
-		placeholder = ''
+		placeholder = undefined,
+		name = undefined,
+		required = false
 	} = props;
 	
     return (
         <input 
             type={type}
-            className={'input-default ' + className}
+            className={'input ' + className}
             onChange={onChange}
             placeholder={placeholder}
+            name={name}
+            required={required}
         />
     );
 }

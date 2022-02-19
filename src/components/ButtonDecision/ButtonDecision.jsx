@@ -21,12 +21,12 @@ function ButtonDecision({type = 'positive', children, onClick}) {
     }
 
     return (
-        <div 
+        <button
             className={'button-decision ' + activeType}
             onClick={onClick}
         >
             {children}
-        </div>
+        </button>
     );
 }
 

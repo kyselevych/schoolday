@@ -6,14 +6,18 @@ function Textarea(props) {
 	const {
 		className = '',
 		onChange = undefined,
-		placeholder = ''
+		placeholder = undefined,
+		name = undefined,
+		required = false
 	} = props;
 	
     return (
         <textarea
-            className={'textarea-default ' + className}
+            className={'textarea ' + className}
             onChange={onChange}
             placeholder={placeholder}
+            name={name}
+            required={required}
         />
     );
 }
