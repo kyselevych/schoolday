@@ -1,9 +1,11 @@
 @use 'src/styles/variables' as *;
 
-.input-time {
-	width: 95px !important;
-}
+.create-lesson {
+	.button-decision {
+		width: 100%;
+	}
 
-.button-decision {
-	width: 100%;
+	.input-time {
+		width: 95px !important;
+	}
 }

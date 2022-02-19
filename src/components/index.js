@@ -7,4 +7,4 @@ export {default as LabelForm} from './LabelForm/LabelForm';
 export {default as Input} from './Input/Input';
 export {default as Textarea} from './Textarea/Textarea';
 export {default as Checkbox} from './Checkbox/Checkbox';
-export {default as WrapperNarrow} from './WrapperNarrow/WrapperNarrow';
+export {default as ButtonGoBack} from './ButtonGoBack/ButtonGoBack';
