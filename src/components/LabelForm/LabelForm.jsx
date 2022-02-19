@@ -6,13 +6,17 @@ function LabelForm(props) {
 	const {
 		labelText = '',
 		className = '',
+		labelPosition = 'start',
 		children
 	} = props;
 	
+	const labelTextElem = labelText && <span className="label-form__text">{labelText}</span>;
+	
     return (
 		<label className={'label-form ' + className}>
-			<span className="label-form__text">{labelText}</span>
+			{labelPosition === 'start' && labelTextElem}
 			{children}
+			{labelPosition === 'end' && labelTextElem}
 		</label>
     );
 }

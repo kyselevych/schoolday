@@ -1,0 +1,31 @@
+@use 'src/styles/variables' as *;
+
+.checkbox {
+	appearance: none;
+	vertical-align: middle;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+    background: transparent;
+	transition: $transition;
+    outline: none;
+
+	&:hover,
+	&:focus {
+		border-color: $dark-color;
+	}
+
+	&:checked {
+		background-color: $dark-color;
+		background-image: url("../../assets/icons/done.svg");
+		background-position: center;
+		background-size: 80%;
+		background-repeat: no-repeat;
+	}
+
+
+
+}
+

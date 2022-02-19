@@ -4,11 +4,12 @@ import './WrapperNarrow.scss';
 function WrapperNarrow(props) {
 	
 	const {
+		className,
 		children
 	} = props;
 	
     return (
-        <article className="wrapper-narrow">
+        <article className={'wrapper-narrow' + ' ' + className}>
 	        {children}
         </article>
     );

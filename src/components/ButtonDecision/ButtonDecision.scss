@@ -4,11 +4,14 @@ $positive-color: #61b94f;
 $negative-color: #e94545;
 
 .button-decision {
+	display: block;
     width: max-content;
     min-width: 200px;
     padding: 1em;
     border-radius: 50px;
     border: 1px solid transparent;
+	font-family: inherit;
+	font-size: inherit;
     text-align: center;
     cursor: pointer;
 	transition: $transition;
