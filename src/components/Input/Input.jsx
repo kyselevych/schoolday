@@ -7,19 +7,20 @@ function Input(props) {
 		type = 'text',
 		className = '',
 		onChange = undefined,
+		onBlur = undefined,
 		placeholder = undefined,
 		name = undefined,
-		required = false
+		value = undefined,
 	} = props;
 	
     return (
         <input 
             type={type}
             className={'input ' + className}
-            onChange={onChange}
             placeholder={placeholder}
             name={name}
-            required={required}
+            value={value}
+            onBlur={onBlur}
         />
     );
 }

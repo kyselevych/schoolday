@@ -46,6 +46,13 @@ body {
 			margin-bottom: 0;
 		}
 	}
+
+	&__label-error {
+		display: inline-block;
+		margin-top: 0.5em;
+		padding-left: 1em;
+		color: $red-color;
+	}
 }
 
 .layout-flex__space-between__align-center {
