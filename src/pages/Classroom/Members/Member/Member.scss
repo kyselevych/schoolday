@@ -1,0 +1,37 @@
+@use 'src/styles/variables' as *;
+
+.classroom {
+	&__members-person {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.2em 1.5em;
+		transition: $transition;
+
+		&:hover {
+			background: $bg-contrast-hover-color;
+		}
+
+		&:not(:last-child) {
+			border-bottom: 1px solid $dark-color;
+		}
+
+		&__remove-btn {
+			display: block;
+			padding: 5px 10px;
+			border: 1px solid $gray-color;
+			background: transparent;
+			color: $gray-color;
+			outline: none;
+			transition: $transition;
+			cursor: pointer;
+
+			&:hover {
+				background: #ff2942;
+				color: #fff;
+				border-color: #ff2942;
+			}
+
+		}
+	}
+}

@@ -25,11 +25,12 @@ body {
 }
 
 .container--styled-content {
-	padding: 50px 70px;
+	padding: 3.5em 4.5em;
 	background-color: $bg-contrast-color;
+	box-shadow: $main-boxShadow;
 
 	& > * {
-		margin-bottom: 20px;
+		margin-bottom: 1.2em;
 
 		&:last-child {
 			margin-bottom: 0;
@@ -39,7 +40,7 @@ body {
 
 .form {
 	& > * {
-		margin-bottom: 20px;
+		margin-bottom: 1.2em;
 
 		&:last-child {
 			margin-bottom: 0;

@@ -3,6 +3,8 @@ import React from "react";
 import Header from "./Header/Header";
 import Timetable from "./Timetable/Timetable";
 import CreateLesson from "./CreateLesson/CreateLesson";
+import Members from "./Members/Members";
+import AddMember from "./AddMember/AddMember";
 
 
 function Classroom() {
@@ -10,7 +12,7 @@ function Classroom() {
 		<main className="classroom">
 			<div className="container">
 				<Header />
-				<CreateLesson />
+				<AddMember />
 			</div>
 		</main>
 	);

@@ -29,7 +29,7 @@ function Lesson(props) {
 	}
 
 	return (
-		<div className={"timetable__lesson" + " " + statusLessonClass}>
+		<div className={"timetable__lesson " + statusLessonClass}>
 			<time className="timetable__lesson-time">{time}</time>
 			<div className="timetable__lesson-name">{name}</div>
 		</div>
