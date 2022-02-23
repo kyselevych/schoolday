@@ -14,7 +14,7 @@ function Classroom() {
 		<main className="classroom">
 			<div className="container">
 				<Header />
-				<AddMember />
+				<CreateLesson />
 			</div>
 		</main>
 	);
