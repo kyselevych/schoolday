@@ -9,13 +9,12 @@ import Settings from "./Settings/Settings";
 import Task from "./Task/Task";
 import TaskReview from "./TaskReview/TaskReview";
 
-
 function Classroom() {
 	return (
 		<main className="classroom">
 			<div className="container">
 				<Header />
-				<TaskReview />
+				<AddMember />
 			</div>
 		</main>
 	);
