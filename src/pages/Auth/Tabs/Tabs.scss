@@ -34,6 +34,7 @@
 		text-align: center;
 		border: 1px solid $gray-color;
 		border-radius: 30px;
+		font-size: inherit;
 		transition: $transition;
 		color: #fff;
 
@@ -56,6 +57,12 @@
 			border-color: $accent-color !important;
 			font-weight: 700;
 			cursor: pointer;
+
+			&:hover {
+				background: $accent-color;
+				border-color: $accent-color !important;
+				color: #fff;
+			}
 		}
 	}
 }

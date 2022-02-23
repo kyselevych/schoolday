@@ -17,7 +17,7 @@ function Auth() {
 					<Tabs />
 				</div>
 			</div>
-			{error && <ErrorBox resetError={setError} textError={error} />}
+			{/*{error && <ErrorBox resetError={setError} textError={error} />}*/}
 		</>
 	);
 }

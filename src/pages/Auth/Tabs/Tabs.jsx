@@ -4,12 +4,30 @@ import './Tabs.scss';
 import TabsNav from "./common/TabsNav";
 import TabsNavItem from "./common/TabsNavItem";
 import TabsContent from "./common/TabsContent";
-import TabsContentItem from "./common/TabsContentItem";
 
+import {useFormik} from "formik";
+import SignUpTabsContent from "./SignUpTabsContent/SignUpTabsContent";
+import SignInTabsContent from "./SignInTabsContent/SignInTabsContent";
 
 function Tabs() {
 
-	const [activeTab, setActiveTab] = useState('signin');
+	const [activeTab, setActiveTab] = useState('signup');
+	
+	function validate(values) {
+		const errors = {};
+	}
+	
+	const formikSignUp = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+			repeatpassword: ''
+		},
+		validate,
+		onSubmit: values => {
+			alert(JSON.stringify(values))
+		}
+	});
 	
 	return (
 		<div className="tabs">
@@ -18,59 +36,8 @@ function Tabs() {
 				<TabsNavItem onTabClick={setActiveTab} activeTab={activeTab} value='signup'>Sign Up</TabsNavItem>
 			</TabsNav>
 			<TabsContent activeTab={activeTab} >
-				<TabsContentItem value='signin'>
-					<form action="POST">
-						<input
-							className="tabs__input"
-							type="email"
-							name="email" placeholder="Enter email"
-							pattern="^[A-Za-z0-9](?:(?![\-\.\_+][\-\.\_+])[\w\-\.])*[A-Za-z0-9]@([A-Za-z0-9]+[A-Za-z0-9\-]*(?![\.\-][\.\-])\.)+[A-Za-z]+$"
-							required
-						/>
-						<input
-							className="tabs__input"
-							type="password"
-							name="password"
-							placeholder="Enter password"
-							required
-						/>
-						<input
-							className="tabs__input"
-							type="password"
-							name="repeatpassword"
-							placeholder="Repeat password"
-							required
-						/>
-						<input
-							className="tabs__input tabs__input--submit"
-							type="submit"
-							name="submit"
-						/>
-					</form>
-				</TabsContentItem>
-				<TabsContentItem value='signup'>
-					<form action="POST">
-						<input
-							className="tabs__input"
-							type="email"
-							name="email" placeholder="Enter email"
-							pattern="^[A-Za-z0-9](?:(?![\-\.\_+][\-\.\_+])[\w\-\.])*[A-Za-z0-9]@([A-Za-z0-9]+[A-Za-z0-9\-]*(?![\.\-][\.\-])\.)+[A-Za-z]+$"
-							required
-						/>
-						<input
-							className="tabs__input"
-							type="password"
-							name="password"
-							placeholder="Enter password"
-							required
-						/>
-						<input
-							className="tabs__input tabs__input--submit"
-							type="submit"
-							name="submit"
-						/>
-					</form>
-				</TabsContentItem>
+				<SignUpTabsContent value="signup"/>
+				<SignInTabsContent value="signin"/>
 			</TabsContent>
 		</div>
 	);
