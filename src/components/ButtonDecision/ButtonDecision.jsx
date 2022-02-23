@@ -2,7 +2,7 @@ import React from "react";
 
 import './ButtonDecision.scss';
 
-function ButtonDecision({type = 'positive', children, onClick}) {
+function ButtonDecision({type = 'positive', children, onClick, className}) {
     let activeType = null;
 
     switch(type) {
@@ -22,7 +22,7 @@ function ButtonDecision({type = 'positive', children, onClick}) {
 
     return (
         <button
-            className={'button-decision ' + activeType}
+            className={'button-decision ' + activeType + ' ' + className}
             onClick={onClick}
         >
             {children}

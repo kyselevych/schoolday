@@ -1,0 +1,7 @@
+@use '../../../styles/variables' as *;
+
+.task {
+	&__description {
+		line-height: 1.5;
+	}
+}

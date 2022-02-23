@@ -1,0 +1,16 @@
+@use 'src/styles/variables' as *;
+
+.task-review {
+	margin-top: 1.5em;
+
+	&__grade-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.button-decision {
+		width: 100%;
+	}
+
+}

@@ -1,0 +1,7 @@
+@use 'src/styles/variables' as *;
+
+.task {
+	&__send-block {
+		margin-top: 1.5em;
+	}
+}
