@@ -32,6 +32,12 @@ function SignUpTabsContent() {
 		if (!values.repeatpassword) {
 			errors.repeatpassword = "Required field";
 		}
+		if (!values.firstname) {
+			errors.firstname = "Required field";
+		}
+		if (!values.lastname) {
+			errors.lastname = "Required field";
+		}
 
 		return errors;
 	}
@@ -40,7 +46,9 @@ function SignUpTabsContent() {
 		initialValues: {
 			email: '',
 			password: '',
-			repeatpassword: ''
+			repeatpassword: '',
+			firstname: '',
+			lastname: ''
 		},
 		validate,
 		onSubmit: values => {
@@ -86,6 +94,30 @@ function SignUpTabsContent() {
 				/>
 				{(formik.touched.repeatpassword && formik.errors.repeatpassword) &&
 					<span className="form__label-error">{formik.errors.repeatpassword}</span>
+				}
+				<input
+					className="tabs__input"
+					type="text"
+					name="firstname"
+					placeholder="Firstname"
+					onChange={formik.handleChange}
+					value={formik.values.firstname}
+					onBlur={formik.handleBlur}
+				/>
+				{(formik.touched.firstname && formik.errors.firstname) &&
+					<span className="form__label-error">{formik.errors.firstname}</span>
+				}
+				<input
+					className="tabs__input"
+					type="text"
+					name="lastname"
+					placeholder="Lastname"
+					onChange={formik.handleChange}
+					value={formik.values.lastname}
+					onBlur={formik.handleBlur}
+				/>
+				{(formik.touched.lastname && formik.errors.lastname) &&
+					<span className="form__label-error">{formik.errors.lastname}</span>
 				}
 				<input
 					className="tabs__input tabs__input--submit"

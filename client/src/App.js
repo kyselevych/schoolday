@@ -7,9 +7,9 @@ import {Classrooms, Classroom, Auth} from './pages';
 function App() {
     return (
         <div className="app">
-            <Header/>
-            <Classroom />
-	        {/*<Auth />*/}
+            {/*<Header/>*/}
+            {/*<Classroom />*/}
+	        <Auth />
         </div>
     );
 }
