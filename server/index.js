@@ -1,8 +1,34 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
-require('dotenv').config();
-
 const app = express();
+const cors = require('cors');
+const errorHandler = require('./middleware/ErrorHandlerMiddleware');
 
-const PORT = process.env.PORT || 5000;
+// Database
+const sequelize = require('./db');
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+async function connectDB() {
+	try {
+		await sequelize.authenticate();
+		await sequelize.sync();
+		console.log("Database success connected");
+	} catch (e) {
+		console.log(e);
+	}
+}
+connectDB();
+
+// Routes
+const router = require('./routes/index');
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use('/', router);
+app.use(errorHandler);
+
+
+app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));
+
