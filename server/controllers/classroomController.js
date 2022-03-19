@@ -48,6 +48,34 @@ class ClassroomController {
 		
 		return res.json({message: 'User successfully added to classroom'});
 	}
+	
+	async removeMember(req, res, next) {
+		const candidate = await User.findOne({where: {
+				email: req.body.email
+		}});
+		
+		if (!candidate) {
+			return next(ApiError.forbidden('User does not exist'));
+		}
+		if (candidate.id === req.user.id) {
+			return next(ApiError.forbidden("You can't remove yourself"));
+		}
+		
+		const candidateIsMemberClassroom = await getClassroomMember(candidate.id, req.params.id);
+		
+		if (!candidateIsMemberClassroom) {
+			return next(ApiError.forbidden('The user is not a member of the class'));
+		}
+		
+		await ClassroomMember.destroy({
+			where: {
+				"userId": candidate.id,
+				"classroomId": req.params.id
+			}
+		})
+		
+		return res.json({message: 'User successfully removed from classroom'});
+	}
 }
 
 module.exports = new ClassroomController();

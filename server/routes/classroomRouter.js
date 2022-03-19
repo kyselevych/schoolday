@@ -5,5 +5,6 @@ const teacherClassroomMiddleware = require('../middleware/teacherClassroomMiddle
 
 router.post('/create', classroomController.createClassroom);
 router.post('/:id/add-member', memberClassroomMiddleware, teacherClassroomMiddleware, classroomController.addMember);
+router.post('/:id/remove-member', memberClassroomMiddleware, teacherClassroomMiddleware, classroomController.removeMember);
 
 module.exports = router;
