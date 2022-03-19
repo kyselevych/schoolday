@@ -3,16 +3,15 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {
 	try {
-		const token = req.headers.authorization.split(' ')[1];
+		const token = req.headers.authorization;
 		if (!token) {
-			return next(ApiError.unauthorized('User unauthorized'));
+			return next(ApiError.unauthorized('User unauthorized', {auth: false}));
 		}
 		
-		const decoded = jwt.verify(token, process.env.SECRET_KEY);
-		console.log(decoded);
-		req.user = decoded;
+		req.user = jwt.verify(token, process.env.SECRET_KEY);
+
 		next();
 	} catch(e) {
-		return next(ApiError.unauthorized('User unauthorized'));
+		return next(ApiError.unauthorized('User unauthorized', {auth: false}));
 	}
 }
