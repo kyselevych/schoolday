@@ -1,7 +1,7 @@
 const sequelize = require('../db');
 const {DataTypes} = require('sequelize');
-const userModel = require('../models/userModel');
-const classroomModel = require('../models/classroomModel');
+const User = require('../models/userModel');
+const Classroom = require('../models/classroomModel');
 
 const ClassroomMember = sequelize.define('classroom_member', {
 	id: {
@@ -16,7 +16,9 @@ const ClassroomMember = sequelize.define('classroom_member', {
 	}
 })
 
-userModel.belongsToMany(classroomModel, {through: ClassroomMember});
-classroomModel.belongsToMany(userModel, {through: ClassroomMember});
+User.belongsToMany(Classroom, {through: ClassroomMember});
+Classroom.belongsToMany(User, {through: ClassroomMember});
+ClassroomMember.belongsTo(User);
+ClassroomMember.belongsTo(Classroom);
 
 module.exports = ClassroomMember;

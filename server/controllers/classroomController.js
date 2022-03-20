@@ -25,6 +25,36 @@ class ClassroomController {
 		return res.json({message: `Classroom ${classroom.name} successful created`});
 	}
 	
+	async getSettings(req, res, next) {
+		const classroom = await Classroom.findOne({
+			where: {id: req.params.id}
+		})
+		
+		return res.json({
+			fields: {
+				field: {
+					title: "Classroom title",
+					field: classroom.name
+				}
+			}
+		})
+	}
+	
+	async setSettings(req, res, next) {
+		const classroom = await Classroom.findOne({
+			where: {id: req.params.id}
+		})
+		
+		classroom.update({
+			name: req.body.fields.name,
+			where: {
+				id: req.params.id
+			}
+		})
+		
+		return res.json({message: "Successfully update settings"});
+	}
+	
 	async addMember(req, res, next) {
 		const candidate = await User.findOne({where: {
 			email: req.body.email
@@ -75,6 +105,38 @@ class ClassroomController {
 		})
 		
 		return res.json({message: 'User successfully removed from classroom'});
+	}
+	
+	async getMembers(req, res, next) {
+		const teachers = await ClassroomMember.findAll({
+			attributes: [],
+			where: {
+				classroomId: req.params.id,
+				role: "TEACHER"
+			},
+			include: [{
+				model: User,
+				attributes: ['id', 'firstname', 'lastname']
+			}]
+		})
+		
+		const students = await ClassroomMember.findAll({
+			attributes: [],
+			where: {
+				classroomId: req.params.id,
+				role: "STUDENT"
+			},
+			include: [{
+				model: User,
+				attributes: ['id', 'firstname', 'lastname']
+			}]
+		})
+
+		
+		return res.json({
+			"teachers": teachers,
+			"students": students
+		});
 	}
 }
 
