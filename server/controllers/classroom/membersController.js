@@ -1,59 +1,11 @@
-const Classroom = require('../models/classroomModel');
-const ClassroomMember = require('../models/classroomMemberModel');
-const User = require('../models/userModel');
-const ApiError = require("../error/ApiError");
+const User = require('../../models/userModel');
+const ClassroomMember = require('../../models/classroomMemberModel');
 
-const getClassroomMember = require('../utils/getClassroomMember');
+const ApiError = require("../../error/ApiError");
 
-class ClassroomController {
-	async createClassroom(req, res, next) {
-		
-		// Create classroom
-		
-		const classroom = await Classroom.create({
-			name: req.body.name
-		})
-		
-		// Add user creator to members how TEACHER
-		
-		const classroomMember = await ClassroomMember.create({
-			userId: req.user.id,
-			classroomId: classroom.id,
-			role: 'TEACHER'
-		})
-		
-		return res.json({message: `Classroom ${classroom.name} successful created`});
-	}
-	
-	async getSettings(req, res, next) {
-		const classroom = await Classroom.findOne({
-			where: {id: req.params.id}
-		})
-		
-		return res.json({
-			fields: {
-				field: {
-					title: "Classroom title",
-					field: classroom.name
-				}
-			}
-		})
-	}
-	
-	async setSettings(req, res, next) {
-		const classroom = await Classroom.findOne({
-			where: {id: req.params.id}
-		})
-		
-		classroom.update({
-			name: req.body.fields.name,
-			where: {
-				id: req.params.id
-			}
-		})
-		
-		return res.json({message: "Successfully update settings"});
-	}
+const getClassroomMember = require('../../utils/getClassroomMember');
+
+class MembersController {
 	
 	async addMember(req, res, next) {
 		const candidate = await User.findOne({where: {
@@ -140,4 +92,4 @@ class ClassroomController {
 	}
 }
 
-module.exports = new ClassroomController();
+module.exports = new MembersController();
