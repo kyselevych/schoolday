@@ -65,6 +65,56 @@ class LessonsController {
 		
 		return res.json({lesson});
 	}
+	
+	async deleteLesson(req, res, next) {
+		const lessonID = req.params.lessonID;
+		
+		const lesson = await ClassroomLesson.destroy({
+			where: {
+				id: lessonID,
+				classroomId: req.params.id
+			}
+		});
+		
+		if (!lesson) {
+			return next(ApiError.forbidden('Lesson is not found'));
+		}
+		
+		return res.json({message: "Lesson successful deleted"});
+	}
+	
+	async updateLesson(req, res, next) {
+		const lessonID = req.params.lessonID;
+		const {
+			name,
+			date,
+			time,
+			description,
+			isHomework
+		} = req.body;
+		
+		
+		const lesson = await ClassroomLesson.findOne({
+			where: {
+				id: lessonID,
+				classroomId: req.params.id
+			}
+		})
+		
+		if (!lesson) {
+			return next(ApiError.forbidden('Lesson is not found'));
+		}
+		
+		lesson.update({
+			name,
+			date,
+			time,
+			description,
+			isHomework
+		});
+		
+		return res.json({message: "Lesson successful updated"});
+	}
 }
 
 module.exports = new LessonsController();

@@ -23,5 +23,7 @@ router.put('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddlewar
 router.post('/:id/lesson', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.createLesson);
 router.get('/:id/lessons', memberClassroomMiddleware, lessonsController.getLessons);
 router.get('/:id/lesson/:lessonID', memberClassroomMiddleware, lessonsController.getLesson);
+router.delete('/:id/lesson/:lessonID', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.deleteLesson);
+router.put('/:id/lesson/:lessonID', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.updateLesson);
 
 module.exports = router;
