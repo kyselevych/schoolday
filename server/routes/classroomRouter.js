@@ -4,6 +4,7 @@ const router = require('express').Router();
 const classroomController = require('../controllers/classroom/classroomController');
 const settingsController = require('../controllers/classroom/settingsController');
 const membersController = require('../controllers/classroom/membersController');
+const lessonsController = require('../controllers/classroom/lessonsController');
 
 // Middlewares
 const memberClassroomMiddleware = require('../middleware/memberClassroomMiddleware');
@@ -18,5 +19,8 @@ router.get('/:id/members', memberClassroomMiddleware, membersController.getMembe
 
 router.get('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddleware,  settingsController.getSettings);
 router.put('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddleware, settingsController.setSettings);
+
+router.post('/:id/lesson', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.createLesson);
+router.get('/:id/lessons', memberClassroomMiddleware, lessonsController.getLessons);
 
 module.exports = router;
