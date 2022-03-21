@@ -22,5 +22,6 @@ router.put('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddlewar
 
 router.post('/:id/lesson', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.createLesson);
 router.get('/:id/lessons', memberClassroomMiddleware, lessonsController.getLessons);
+router.get('/:id/lesson/:lessonID', memberClassroomMiddleware, lessonsController.getLesson);
 
 module.exports = router;

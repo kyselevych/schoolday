@@ -48,6 +48,23 @@ class LessonsController {
 		
 		return res.json({lessons});
 	}
+	
+	async getLesson(req, res, next) {
+		const lessonID = req.params.lessonID;
+		
+		const lesson = await ClassroomLesson.findOne({
+			where: {
+				id: lessonID,
+				classroomId: req.params.id
+			}
+		});
+		
+		if (!lesson) {
+			return next(ApiError.forbidden('Lesson is not found'));
+		}
+		
+		return res.json({lesson});
+	}
 }
 
 module.exports = new LessonsController();
