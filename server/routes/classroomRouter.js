@@ -5,25 +5,36 @@ const classroomController = require('../controllers/classroom/classroomControlle
 const settingsController = require('../controllers/classroom/settingsController');
 const membersController = require('../controllers/classroom/membersController');
 const lessonsController = require('../controllers/classroom/lessonsController');
+const solutionsController = require('../controllers/classroom/solutionsController');
 
 // Middlewares
 const memberClassroomMiddleware = require('../middleware/memberClassroomMiddleware');
 const teacherClassroomMiddleware = require('../middleware/teacherClassroomMiddleware');
+const lessonBelongToClassroomMiddleware = require('../middleware/lessonBelongToClassroomMiddleware');
+
+const checkMember = [memberClassroomMiddleware]
+const checkTeacher = [memberClassroomMiddleware, teacherClassroomMiddleware];
+const checkLesson = [lessonBelongToClassroomMiddleware];
 
 // Routes
 router.post('/create', classroomController.createClassroom);
 
-router.post('/:id/member', memberClassroomMiddleware, teacherClassroomMiddleware, membersController.addMember);
-router.delete('/:id/member', memberClassroomMiddleware, teacherClassroomMiddleware, membersController.removeMember);
-router.get('/:id/members', memberClassroomMiddleware, membersController.getMembers);
+router.post('/:id/member', checkTeacher, membersController.addMember);
+router.delete('/:id/member', checkTeacher, membersController.removeMember);
+router.get('/:id/members', checkMember, membersController.getMembers);
 
-router.get('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddleware,  settingsController.getSettings);
-router.put('/:id/settings', memberClassroomMiddleware, teacherClassroomMiddleware, settingsController.setSettings);
+router.get('/:id/settings', checkTeacher, settingsController.getSettings);
+router.put('/:id/settings', checkTeacher, settingsController.setSettings);
 
-router.post('/:id/lesson', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.createLesson);
-router.get('/:id/lessons', memberClassroomMiddleware, lessonsController.getLessons);
-router.get('/:id/lesson/:lessonID', memberClassroomMiddleware, lessonsController.getLesson);
-router.delete('/:id/lesson/:lessonID', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.deleteLesson);
-router.put('/:id/lesson/:lessonID', memberClassroomMiddleware, teacherClassroomMiddleware, lessonsController.updateLesson);
+router.get('/:id/lessons', checkMember, lessonsController.getLessons);
+router.get('/:id/lesson/:lessonID', checkMember, checkLesson, lessonsController.getLesson);
+router.post('/:id/lesson', checkTeacher, lessonsController.createLesson);
+router.delete('/:id/lesson/:lessonID', checkTeacher, checkLesson, lessonsController.deleteLesson);
+router.put('/:id/lesson/:lessonID', checkTeacher, checkLesson, lessonsController.updateLesson);
+
+router.post('/:id/lesson/:lessonID/solution', checkMember, checkLesson, solutionsController.addSolution);
+router.get('/:id/lesson/:lessonID/solutions', checkMember, checkLesson, solutionsController.getListSolutions);
+router.get('/:id/lesson/:lessonID/solution/:solutionID', checkTeacher, checkLesson, solutionsController.getSolution);
+router.put('/:id/lesson/:lessonID/solution/:solutionID/estimate', checkTeacher, checkLesson, solutionsController.setGrade);
 
 module.exports = router;

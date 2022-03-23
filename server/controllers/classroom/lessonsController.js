@@ -4,7 +4,6 @@ const moment = require('moment');
 const ClassroomLesson = require('../../models/classroomLessonModel');
 const ApiError = require("../../error/ApiError");
 
-
 class LessonsController {
 	async createLesson(req, res) {
 		const {
@@ -50,41 +49,26 @@ class LessonsController {
 	}
 	
 	async getLesson(req, res, next) {
-		const lessonID = req.params.lessonID;
-		
-		const lesson = await ClassroomLesson.findOne({
-			where: {
-				id: lessonID,
-				classroomId: req.params.id
-			}
-		});
-		
-		if (!lesson) {
-			return next(ApiError.forbidden('Lesson is not found'));
-		}
+		const lesson = req.lesson;
 		
 		return res.json({lesson});
 	}
 	
 	async deleteLesson(req, res, next) {
-		const lessonID = req.params.lessonID;
+		const lesson = req.lesson;
 		
-		const lesson = await ClassroomLesson.destroy({
-			where: {
-				id: lessonID,
-				classroomId: req.params.id
-			}
-		});
-		
-		if (!lesson) {
-			return next(ApiError.forbidden('Lesson is not found'));
+		try {
+			await lesson.destroy();
+			
+			return res.json({message: "Lesson successful deleted"});
+		} catch (e) {
+			console.log(e);
 		}
-		
-		return res.json({message: "Lesson successful deleted"});
 	}
 	
 	async updateLesson(req, res, next) {
-		const lessonID = req.params.lessonID;
+		const lesson = req.lesson;
+		
 		const {
 			name,
 			date,
@@ -92,18 +76,6 @@ class LessonsController {
 			description,
 			isHomework
 		} = req.body;
-		
-		
-		const lesson = await ClassroomLesson.findOne({
-			where: {
-				id: lessonID,
-				classroomId: req.params.id
-			}
-		})
-		
-		if (!lesson) {
-			return next(ApiError.forbidden('Lesson is not found'));
-		}
 		
 		lesson.update({
 			name,
