@@ -1,27 +1,27 @@
-import React, {useState} from "react";
+import React, {useCallback} from "react";
+import {NavLink, useOutlet} from "react-router-dom";
 
 import './Tabs.scss';
-import TabsNav from "./common/TabsNav";
-import TabsNavItem from "./common/TabsNavItem";
-import TabsContent from "./common/TabsContent";
-
-import SignUpTabsContent from "./SignUpTabsContent/SignUpTabsContent";
-import SignInTabsContent from "./SignInTabsContent/SignInTabsContent";
 
 function Tabs() {
-
-	const [activeTab, setActiveTab] = useState('signup');
+	
+	const outlet = useOutlet();
+	
+	const setClassName = useCallback(({isActive}) => {
+		const activeClass = isActive ? 'tabs__nav-item--active' : '';
+		
+		return `tabs__nav-item ${activeClass}`;
+	}, []);
 	
 	return (
 		<div className="tabs">
-			<TabsNav>
-				<TabsNavItem onTabClick={setActiveTab} activeTab={activeTab} value='signin'>Sign In</TabsNavItem>
-				<TabsNavItem onTabClick={setActiveTab} activeTab={activeTab} value='signup'>Sign Up</TabsNavItem>
-			</TabsNav>
-			<TabsContent activeTab={activeTab} >
-				<SignUpTabsContent value="signup"/>
-				<SignInTabsContent value="signin"/>
-			</TabsContent>
+			<div className="tabs__nav">
+				<NavLink to="/login" className={setClassName}>Login</NavLink>
+				<NavLink to="/registration" className={setClassName}>Registration</NavLink>
+			</div>
+			<div className="tabs__content-container">
+				{outlet}
+			</div>
 		</div>
 	);
 }

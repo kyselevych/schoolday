@@ -1,14 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 
 import './Auth.scss'; 
 import Tabs from "./Tabs/Tabs";
-import ErrorBox from "@components/ErrorBox/ErrorBox";
 
-import SchoolDayLogo from '@assets/icons/schoolDayLogo.svg';
+import SchoolDayLogo from 'assets/icons/schoolDayLogo.svg';
 
 function Auth() {
-	const [error, setError] = useState('Error! BAN!');
-
 	return (
 		<>
 			<div className="auth">
@@ -17,7 +14,6 @@ function Auth() {
 					<Tabs />
 				</div>
 			</div>
-			{/*{error && <ErrorBox resetError={setError} textError={error} />}*/}
 		</>
 	);
 }

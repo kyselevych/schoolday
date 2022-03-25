@@ -3,6 +3,11 @@ import {Routes, Route} from 'react-router-dom';
 
 import {Auth, Classroom, Classrooms, MainLayout} from "../../pages";
 
+// Auth routes
+import LoginForm from "../../pages/Auth/Tabs/LoginForm/LoginForm";
+import RegistrationForm from "../../pages/Auth/Tabs/RegistrationForm/RegistrationForm";
+
+// Classroom routes
 import AddMember from "../../pages/Classroom/AddMember/AddMember";
 import Timetable from "../../pages/Classroom/Timetable/Timetable";
 import CreateLesson from "../../pages/Classroom/CreateLesson/CreateLesson";
@@ -16,8 +21,11 @@ import RequireAuth from "../../hoc/RequireAuth";
 const AppRouter = () => {
 	return (
 		<Routes>
-			<Route path="/login" element={<Auth activePage="signin"/>}/>
-			<Route path="/register" element={<Auth activePage="signup"/>}/>
+			<Route path="/" element={<Auth/>}>
+				<Route path="login" element={<LoginForm/>}/>
+				<Route path="registration" element={<RegistrationForm/>}/>
+			</Route>
+			
 			<Route path="/" element={<RequireAuth><MainLayout /></RequireAuth>}>
 				<Route index element={<Classrooms />}/>
 				<Route path="classroom/:id" element={<Classroom />}>

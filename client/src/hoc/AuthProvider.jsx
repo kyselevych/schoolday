@@ -1,5 +1,5 @@
 import React, {createContext, useCallback, useEffect, useMemo, useState} from 'react';
-import {authUserAPI} from "../http/userAPI";
+import {authUserAPI} from "http/userAPI";
 import jwtDecode from "jwt-decode";
 
 export const AuthContext = createContext(null);
@@ -28,6 +28,7 @@ function AuthProvider({children}) {
 				const response = await authUserAPI(tokenData);
 				const data = await response.json();
 				const decodedToken = jwtDecode(data.token);
+				
 				setToken(data.token);
 				setUser(decodedToken);
 			}
@@ -41,6 +42,22 @@ function AuthProvider({children}) {
 
 	}, [setToken])
 	
+	const login = useCallback((token) => {
+		try {
+			const decodedToken = jwtDecode(token);
+			
+			setToken(token);
+			setUser(decodedToken);
+		} catch (err) {
+			console.log(err);
+		}
+	}, []);
+	
+	const logout = useCallback(() => {
+		setToken(null);
+		setUser(null);
+	}, []);
+	
 	useEffect(() => {
 		auth();
 	}, [auth])
@@ -50,8 +67,10 @@ function AuthProvider({children}) {
 		user,
 		token,
 		setToken,
-		setUser
-	}), [isLoaded, user, token, setToken, setUser])
+		setUser,
+		login,
+		logout
+	}), [isLoaded, user, token, setToken, setUser, login, logout])
 
 	return (
 		<AuthContext.Provider value={contextValue}>

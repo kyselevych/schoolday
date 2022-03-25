@@ -9,13 +9,17 @@
 	}
 
 	&__nav-item {
+		display: block;
 		width: 50%;
 		padding: 1em 0;
 		border-bottom: 1px solid $gray-color;
 		text-align: center;
+		color: inherit;
+		text-decoration: none;
 		cursor: pointer;
 		transition: $transition;
 		user-select: none;
+
 
 		&:hover {
 			border-color: #fff;
