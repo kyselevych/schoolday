@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
+import {LOGIN_PATH} from "utils/pathConsts";
+import useAuth from "hook/useAuth";
 
 function Account() {
     const [activeDropMenu, setActiveDropMenu] = useState(false);
+	const {user, logout} = useAuth();
 
     function showDropMenu() {
         setActiveDropMenu(true);
@@ -17,11 +21,10 @@ function Account() {
             onMouseEnter={showDropMenu}
             onMouseLeave={hideDropMenu}
         >
-            Volodymyr
+	        {user.firstname}
             {activeDropMenu &&
                 <div className="header__account-menu">
-                    <div className="header__account-menu-item">Settings</div>
-                    <div className="header__account-menu-item">Exit</div>
+                    <Link className="header__account-menu-item" to={LOGIN_PATH} onClick={logout}>Exit</Link>
                 </div>
             }
         </div>

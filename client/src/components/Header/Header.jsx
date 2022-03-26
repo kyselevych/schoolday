@@ -3,6 +3,8 @@ import './Header.scss';
 
 import schoolDayLogo from 'assets/icons/schoolDayLogo.svg';
 import Account from "./Account";
+import {Link} from "react-router-dom";
+import {CLASSROOMS_PATH} from "utils/pathConsts";
 
 function Header() {
     return (
@@ -10,7 +12,7 @@ function Header() {
             <div className="container">
                 <img src={schoolDayLogo} alt="SchoolDayLogo" className="header__logo"/>
                 <div className="header__nav">
-                    <div className="header__nav-item">Classrooms</div>
+                    <Link className="header__nav-item" to={CLASSROOMS_PATH}>Classrooms</Link>
                 </div>
                 <Account />
             </div>
