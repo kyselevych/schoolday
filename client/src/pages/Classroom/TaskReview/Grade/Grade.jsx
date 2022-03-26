@@ -1,7 +1,7 @@
 import React from "react";
 import './Grade.scss';
 
-import {ButtonDecision, LabelForm} from "@components";
+import {ButtonDecision, LabelForm} from "components";
 import {useFormik} from "formik";
 
 function Grade() {

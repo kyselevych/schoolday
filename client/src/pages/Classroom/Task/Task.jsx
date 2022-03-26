@@ -5,7 +5,7 @@ import TaskForm from "./TaskForm/TaskForm";
 import TaskDescription from "./TaskDescription/TaskDescription";
 import StudentsList from "./StudentsList/StudentsList";
 
-import {ButtonGoBack} from "@components";
+import {ButtonGoBack} from "components";
 
 function Task() {
 	

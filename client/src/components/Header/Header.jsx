@@ -1,7 +1,7 @@
 import React from "react";
 import './Header.scss';
 
-import schoolDayLogo from '@assets/icons/schoolDayLogo.svg';
+import schoolDayLogo from 'assets/icons/schoolDayLogo.svg';
 import Account from "./Account";
 
 function Header() {

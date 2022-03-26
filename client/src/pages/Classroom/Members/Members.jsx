@@ -1,7 +1,7 @@
 import React from "react";
 import './Members.scss';
 
-import {ButtonAdd} from "@components";
+import {ButtonAdd} from "components";
 import Member from "./Member/Member";
 
 
@@ -15,7 +15,7 @@ function Members() {
 		<>
 			{ isTeacher &&
 				<div className="container--narrow">
-					<ButtonAdd className="classroom__members__button-add">Add member</ButtonAdd>
+					<ButtonAdd className="classroom__members__button-add" to="../add-member">Add member</ButtonAdd>
 				</div>
 			}
 			<section className="container--narrow container--styled-content">

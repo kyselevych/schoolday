@@ -1,4 +1,4 @@
-@use '@styles/variables' as *;
+@use 'styles/variables' as *;
 
 $color-bg-name-class: #ff8929;
 
@@ -31,6 +31,8 @@ $color-bg-name-class: #ff8929;
 			justify-content: center;
 			align-items: center;
 			padding: 20px 30px;
+			text-decoration: none;
+			color: inherit;
 			
 			&:hover {
 				background-color: $bg-contrast-hover-color;

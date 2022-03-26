@@ -6,6 +6,7 @@ import {useFormik} from "formik";
 import {loginUserAPI} from "http/userAPI";
 import useAuth from "hook/useAuth";
 import {useNavigate} from "react-router-dom";
+import {CLASSROOMS_PATH} from "utils/pathConsts";
 
 function LoginForm() {
 	const {login, logout} = useAuth();
@@ -30,7 +31,7 @@ function LoginForm() {
 		
 		if (response.status === 200) {
 			login(data.token);
-			navigate('/');
+			navigate(CLASSROOMS_PATH);
 			return;
 		}
 		

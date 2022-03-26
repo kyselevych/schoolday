@@ -1,12 +1,15 @@
 @use 'src/styles/variables' as *;
 
 .button-add {
+	display: block;
     position: relative;
     width: max-content;
     padding: 20px 30px 20px 80px;
     border-radius: 2em;
     transition: $transition;
     cursor: pointer;
+	text-decoration: none;
+	color: inherit;
 
     &::before {
         content: '';

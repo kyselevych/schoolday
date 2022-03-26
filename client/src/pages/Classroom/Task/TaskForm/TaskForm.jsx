@@ -1,7 +1,7 @@
 import React from "react";
 import './TaskForm.scss';
 
-import {LabelForm, ButtonDecision} from "@components";
+import {LabelForm, ButtonDecision} from "components";
 import {useFormik} from "formik";
 
 function TaskForm() {

@@ -1,12 +1,13 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 import './ButtonAdd.scss';
 
-function ButtonAdd({children, onClick, className}) {
+function ButtonAdd({children, onClick, className, to}) {
     return (
-        <div className={"button-add" + " " + className} onClick={onClick}>
+        <Link className={"button-add" + " " + className} onClick={onClick} to={to}>
             {children}
-        </div>
+        </Link>
     );
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import './Settings.scss';
 
-import {LabelForm, ButtonDecision} from "@components";
+import {LabelForm, ButtonDecision} from "components";
 import {useFormik} from "formik";
 
 function Settings() {

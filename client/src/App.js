@@ -1,15 +1,14 @@
 import React from "react";
-import '@styles/index.scss';
+import 'styles/index.scss';
+import AuthProvider from "./hoc/AuthProvider";
+import {AppRouter} from "components";
 
-import {Header} from './components';
-import {Classrooms, Classroom, Auth} from './pages';
- 
 function App() {
     return (
         <div className="app">
-            {/*<Header/>*/}
-            {/*<Classroom />*/}
-	        <Auth />
+	        <AuthProvider>
+		        <AppRouter />
+	        </AuthProvider>
         </div>
     );
 }

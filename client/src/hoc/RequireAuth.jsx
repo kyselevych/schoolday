@@ -1,6 +1,7 @@
 import React from 'react';
 import {Navigate} from "react-router-dom";
-import useAuth from "../hook/useAuth";
+import useAuth from "hook/useAuth";
+import {LOGIN_PATH} from "utils/pathConsts";
 
 function RequireAuth({children}){
 	const {user, isLoaded} = useAuth();
@@ -10,7 +11,7 @@ function RequireAuth({children}){
 	}
 	
 	if (!user) {
-		return <Navigate to="/login" />;
+		return <Navigate to={LOGIN_PATH} />;
 	}
 	
 	return children;

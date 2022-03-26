@@ -1,7 +1,7 @@
 import React from "react";
 import './CreateLesson.scss';
 
-import {Input, Textarea, LabelForm, ButtonDecision, Checkbox, ButtonGoBack} from "@components";
+import {LabelForm, ButtonDecision, Checkbox, ButtonGoBack} from "components";
 import TimeField from "react-simple-timefield";
 import {useFormik} from "formik";
 

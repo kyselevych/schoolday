@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import './Classrooms.scss';
 import ListClassrooms from "./ListClassrooms/ListClassrooms";
-import {ModalWindow, ButtonAdd, ButtonDecision, Input, LabelForm} from '@components';
+import {ModalWindow, ButtonAdd, ButtonDecision, Input, LabelForm} from 'components';
 
 function Classrooms() {
     const [isOpenModalWindow, setIsOpenModalWindow] = useState(false);
@@ -18,7 +18,7 @@ function Classrooms() {
     return (
         <div className="classrooms">
             <div className="container">
-                <ButtonAdd onClick={openModalWindow}>Create new classroom</ButtonAdd>
+                <ButtonAdd to="/">Create new classroom</ButtonAdd>
                 <ListClassrooms />
             </div>
             {isOpenModalWindow && 

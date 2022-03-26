@@ -1,7 +1,7 @@
 import React from "react";
 import './AddMember.scss';
 
-import {Input, LabelForm, ButtonDecision,ButtonGoBack} from "@components";
+import {LabelForm, ButtonDecision,ButtonGoBack} from "components";
 
 import {useFormik} from "formik";
 

@@ -1,29 +1,23 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 
-import {Auth, Classroom, Classrooms, MainLayout} from "../../pages";
+import {Auth, Classroom, Classrooms, MainLayout} from "pages";
+import {AddMember, Timetable, CreateLesson, Members, Settings, Task, TaskReview} from 'pages/Classroom';
 
 // Auth routes
-import LoginForm from "../../pages/Auth/Tabs/LoginForm/LoginForm";
-import RegistrationForm from "../../pages/Auth/Tabs/RegistrationForm/RegistrationForm";
+import LoginForm from "pages/Auth/Tabs/LoginForm/LoginForm";
+import RegistrationForm from "pages/Auth/Tabs/RegistrationForm/RegistrationForm";
 
 // Classroom routes
-import AddMember from "../../pages/Classroom/AddMember/AddMember";
-import Timetable from "../../pages/Classroom/Timetable/Timetable";
-import CreateLesson from "../../pages/Classroom/CreateLesson/CreateLesson";
-import Members from "../../pages/Classroom/Members/Members";
-import Settings from "../../pages/Classroom/Settings/Settings";
-import Task from "../../pages/Classroom/Task/Task";
-import TaskReview from "../../pages/Classroom/TaskReview/TaskReview";
-
-import RequireAuth from "../../hoc/RequireAuth";
+import RequireAuth from "hoc/RequireAuth";
+import {LOGIN_PATH, REGISTER_PATH} from "utils/pathConsts";
 
 const AppRouter = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<Auth/>}>
-				<Route path="login" element={<LoginForm/>}/>
-				<Route path="registration" element={<RegistrationForm/>}/>
+				<Route path={LOGIN_PATH} element={<LoginForm/>}/>
+				<Route path={REGISTER_PATH} element={<RegistrationForm/>}/>
 			</Route>
 			
 			<Route path="/" element={<RequireAuth><MainLayout /></RequireAuth>}>

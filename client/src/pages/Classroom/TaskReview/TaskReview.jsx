@@ -1,7 +1,7 @@
 import React from "react";
 import './TaskReview.scss';
 
-import {ButtonGoBack} from "@components";
+import {ButtonGoBack} from "components";
 import Grade from "./Grade/Grade";
 import Info from "./Info/Info";
 
