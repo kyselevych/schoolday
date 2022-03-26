@@ -1,14 +1,27 @@
-.error-box {
+.notification {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
 
+	&--negative &__text{
+		background: #ff2942;
+	}
+	&--negative &__line {
+		background: #b91a2c;
+	}
+
+	&--positive &__text{
+		background: #26b927;
+	}
+	&--positive &__line {
+		background: #0c7316;
+	}
+
     &__text {
         width: 100%;
         padding: 15px 0;
         text-align: center;
-        background: #ff2942;
         color: #fff;
     }
     
@@ -22,5 +35,15 @@
         background: #fff;
         height: 100%;
         width: 100%;
+		animation: animate-notification-line 3s;
     }
+}
+
+@keyframes animate-notification-line {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 0;
+	}
 }
