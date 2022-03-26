@@ -20,6 +20,21 @@ class ClassroomController {
 		
 		return res.json({message: `Classroom ${classroom.name} successful created`});
 	}
+	
+	async getClassroomsByUserId(req, res, next) {
+		const listClassrooms =  await ClassroomMember.findAll({
+			attributes: [],
+			where: {
+				userId: req.user.id
+			},
+			include: {
+				model: Classroom,
+				attributes: ['id', 'name']
+			}
+		});
+		
+		return res.json({listClassrooms})
+	}
 }
 
 module.exports = new ClassroomController();

@@ -18,6 +18,7 @@ const checkLesson = [lessonBelongToClassroomMiddleware];
 
 // Routes
 router.post('/create', classroomController.createClassroom);
+router.get('/list', classroomController.getClassroomsByUserId);
 
 router.post('/:id/member', checkTeacher, membersController.addMember);
 router.delete('/:id/member', checkTeacher, membersController.removeMember);
