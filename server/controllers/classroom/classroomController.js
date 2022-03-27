@@ -1,5 +1,6 @@
 const Classroom = require('../../models/classroomModel');
 const ClassroomMember = require('../../models/classroomMemberModel');
+const ApiError = require("../../error/ApiError");
 
 class ClassroomController {
 	async createClassroom(req, res, next) {
@@ -19,6 +20,31 @@ class ClassroomController {
 		})
 		
 		return res.json({message: `Classroom ${classroom.name} successful created`});
+	}
+	
+	async getClassroom(req, res, next) {
+		const classroomId = req.params.id;
+		const userRole = req.user.role;
+		
+		try {
+			const classroom = await Classroom.findOne({
+				attributes: ['id', 'name'],
+				where: {
+					id: classroomId
+				}
+			})
+			
+			if (!classroom) {
+				return next(ApiError.forbidden('Classroom is not found'));
+			}
+			if (!userRole) {
+				return next(ApiError.forbidden('User role in classroom is undefined'));
+			}
+			
+			return res.json({classroom, userRole});
+		} catch (err) {
+			return next(ApiError.forbidden('Classroom is not found'));
+		}
 	}
 	
 	async getClassroomsByUserId(req, res, next) {
