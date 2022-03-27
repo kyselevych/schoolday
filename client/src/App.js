@@ -1,14 +1,17 @@
 import React from "react";
 import 'styles/index.scss';
-import AuthProvider from "./hoc/AuthProvider";
+import AuthProvider from "hoc/AuthProvider";
 import {AppRouter} from "components";
+import NotificationProvider from "hoc/NotificationProvider";
 
 function App() {
     return (
         <div className="app">
-	        <AuthProvider>
-		        <AppRouter />
-	        </AuthProvider>
+	        <NotificationProvider>
+		        <AuthProvider>
+			        <AppRouter />
+		        </AuthProvider>
+	        </NotificationProvider>
         </div>
     );
 }

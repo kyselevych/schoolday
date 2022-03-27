@@ -8,10 +8,12 @@ import {registrationUserAPI} from "http/userAPI";
 import useAuth from "hook/useAuth";
 import {useNavigate} from "react-router-dom";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
+import useNotification from "hook/useNotification";
 
 function RegistrationForm() {
 	const {login, logout} = useAuth();
 	const navigate = useNavigate();
+	const {notification} = useNotification();
 	
 	const onSubmit = async (values) => {
 		const response = await registrationUserAPI(values);
@@ -20,11 +22,12 @@ function RegistrationForm() {
 		if (response.status === 200) {
 			login(data.token);
 			navigate(CLASSROOMS_PATH);
+			notification('You have successfully registered');
 			return;
 		}
-		
-		console.log(data.message || 'Unknown error');
+
 		logout();
+		notification(data.message || 'Unknown error', 'negative');
 	}
 	
 	const formik = useFormik({

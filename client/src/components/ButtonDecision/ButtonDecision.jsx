@@ -24,6 +24,7 @@ function ButtonDecision({type = 'positive', children, onClick, className}) {
         <button
             className={'button-decision ' + activeType + ' ' + className}
             onClick={onClick}
+            type="submit"
         >
             {children}
         </button>

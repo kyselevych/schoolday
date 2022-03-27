@@ -7,10 +7,12 @@ import {loginUserAPI} from "http/userAPI";
 import useAuth from "hook/useAuth";
 import {useNavigate} from "react-router-dom";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
+import useNotification from "hook/useNotification";
 
 function LoginForm() {
 	const {login, logout} = useAuth();
 	const navigate = useNavigate();
+	const {notification} = useNotification();
 	
 	function validate(values) {
 		const errors = {};
@@ -32,11 +34,11 @@ function LoginForm() {
 		if (response.status === 200) {
 			login(data.token);
 			navigate(CLASSROOMS_PATH);
+			notification('You have successfully logged in');
 			return;
 		}
-		
-		console.log(data.message || 'Unknown error');
 		logout();
+		notification(data.message || 'Unknown error', 'negative');
 	}
 	
 	const formik = useFormik({

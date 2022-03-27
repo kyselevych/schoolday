@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 
 import {Auth, Classroom, Classrooms, MainLayout} from "pages";
-import {AddMember, Timetable, CreateLesson, Members, Settings, Task, TaskReview} from 'pages/Classroom';
+import {AddMember, Timetable, CreateLesson, Members, Settings, Task, TaskReview, CreateClassroom} from 'pages/Classroom';
 
 // Auth routes
 import LoginForm from "pages/Auth/Tabs/LoginForm/LoginForm";
@@ -22,6 +22,7 @@ const AppRouter = () => {
 			
 			<Route path="/" element={<RequireAuth><MainLayout /></RequireAuth>}>
 				<Route index element={<Classrooms />}/>
+				<Route path="classroom/create" element={<CreateClassroom />}/>
 				<Route path="classroom/:id" element={<Classroom />}>
 					<Route index element={<Timetable/>}/>
 					<Route path="add-member" element={<AddMember/>}/>

@@ -49,7 +49,8 @@ function AuthProvider({children}) {
 			setToken(token);
 			setUser(decodedToken);
 		} catch (err) {
-			console.log(err);
+			setUser(null);
+			setToken(null);
 		}
 	}, []);
 	
