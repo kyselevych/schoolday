@@ -4,6 +4,7 @@ import AuthProvider from "hoc/AuthProvider";
 import {AppRouter} from "components";
 import NotificationProvider from "hoc/NotificationProvider";
 
+
 function App() {
     return (
         <div className="app">

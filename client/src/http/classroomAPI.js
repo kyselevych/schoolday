@@ -18,3 +18,13 @@ export async function createClassroomAPI(token, values) {
 		body: JSON.stringify(values)
 	})
 }
+
+export async function getClassroomAPI(token, classroomId) {
+	return await fetch(`http://localhost:5000/api/classroom/${classroomId}`,{
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		}
+	})
+}

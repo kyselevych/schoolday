@@ -10,7 +10,10 @@ import RegistrationForm from "pages/Auth/Tabs/RegistrationForm/RegistrationForm"
 
 // Classroom routes
 import RequireAuth from "hoc/RequireAuth";
+import RequireAccessToCR from "hoc/RequireAccessToCR";
 import {LOGIN_PATH, REGISTER_PATH} from "utils/pathConsts";
+import ClassroomProvider from "hoc/ClassroomProvider";
+
 
 const AppRouter = () => {
 	return (
@@ -23,7 +26,13 @@ const AppRouter = () => {
 			<Route path="/" element={<RequireAuth><MainLayout /></RequireAuth>}>
 				<Route index element={<Classrooms />}/>
 				<Route path="classroom/create" element={<CreateClassroom />}/>
-				<Route path="classroom/:id" element={<Classroom />}>
+				<Route path="classroom/:id" element={
+					<ClassroomProvider>
+						<RequireAccessToCR>
+							<Classroom />
+						</RequireAccessToCR>
+					</ClassroomProvider>
+				}>
 					<Route index element={<Timetable/>}/>
 					<Route path="add-member" element={<AddMember/>}/>
 					<Route path="create-lesson" element={<CreateLesson/>}/>
