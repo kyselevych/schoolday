@@ -1,0 +1,11 @@
+@use 'src/styles/variables' as *;
+
+.create-classroom {
+	.button-decision {
+		width: 100%;
+	}
+}
+
+.classroom-create__btn-go-back {
+	margin-top: 20px;
+}

@@ -7,3 +7,14 @@ export async function listClassroomsAPI(token) {
 		}
 	})
 }
+
+export async function createClassroomAPI(token, values) {
+	return await fetch('http://localhost:5000/api/classroom/create',{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(values)
+	})
+}

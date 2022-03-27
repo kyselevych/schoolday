@@ -6,3 +6,4 @@ export {default as Settings} from './Settings/Settings';
 export {default as Task} from './Task/Task';
 export {default as TaskReview} from './TaskReview/TaskReview';
 export {default as Timetable} from './Timetable/Timetable';
+export {default as CreateClassroom} from './CreateClassroom/CreateClassroom';
