@@ -35,10 +35,13 @@ const AppRouter = () => {
 				}>
 					<Route index element={<Timetable/>}/>
 					<Route path="add-member" element={<AddMember/>}/>
-					<Route path="create-lesson" element={<CreateLesson/>}/>
+					<Route path="create-lesson">
+						<Route index element={<CreateLesson/>} />
+						<Route path=":date" element={<CreateLesson/>}/>
+					</Route>
 					<Route path="members" element={<Members/>}/>
 					<Route path="settings" element={<Settings/>}/>
-					<Route path="task" element={<Task/>}/>
+					<Route path="task/:task" element={<Task/>}/>
 					<Route path="task-review" element={<TaskReview/>}/>
 				</Route>
 			</Route>

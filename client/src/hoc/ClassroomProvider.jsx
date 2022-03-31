@@ -51,7 +51,8 @@ function ClassroomProvider({children}) {
 		userRole,
 		loadClassroom,
 		notificationMessage,
-	}), [isLoaded, classroom, userRole, loadClassroom, notificationMessage])
+		classroomId
+	}), [isLoaded, classroom, userRole, loadClassroom, notificationMessage, classroomId])
 
 	return (
 		<ClassroomContext.Provider value={contextValue}>

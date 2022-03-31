@@ -9,3 +9,4 @@ export {default as Textarea} from './Textarea/Textarea';
 export {default as Checkbox} from './Checkbox/Checkbox';
 export {default as ButtonGoBack} from './ButtonGoBack/ButtonGoBack';
 export {default as AppRouter} from './AppRouter/AppRouter';
+export {default as notification} from './Notification/Notification';

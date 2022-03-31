@@ -3,29 +3,32 @@ import React from "react";
 import './Day.scss';
 
 import Lesson from "./Lesson/Lesson";
+import useClassroom from "hook/useClassroom";
+import {useNavigate} from "react-router-dom";
 
 function Day(props) {
+	const navigate = useNavigate();
+	const {userRole} = useClassroom();
 	
-	const {
-		name,
-		date,
-		lessons,
-		userRole
-	} = props;
+	const {day} = props;
 	
 	return (
 		<div className="timetable__day">
 			<div className="timetable__day-header">
-				<date className="timetable__day-date">{date}</date>
-				<div className="timetable__day-name">{name}</div>
+				<div className="timetable__day-date">{day.shortDate}</div>
+				<div className="timetable__day-name">{day.name}</div>
 			</div>
 			{
-				lessons?.map(lesson => {
-					return <Lesson name={lesson.name} time={lesson.time} status={lesson.status}/>
+				day.lessons?.map(lesson => {
+					return <Lesson key={day.date} lesson={lesson}/>
 				})
 			}
 			{
-				userRole === "teacher" && <div className="timetable__add-lesson">Add lesson</div>
+				userRole === "TEACHER" &&
+				<div
+					className="timetable__add-lesson"
+					onClick={() => navigate(`create-lesson/${day.date}`)}
+				>Add lesson</div>
 			}
 		</div>
 	);

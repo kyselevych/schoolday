@@ -1,50 +1,58 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import moment from "moment";
 
 import './Timetable.scss';
 
 import Day from "./Day/Day";
+import Search from "./Search/Search";
+
+import useAuth from "hook/useAuth";
+import useClassroom from "hook/useClassroom";
+import {getLessonsAPI} from "http/classroomAPI";
 
 function Timetable() {
+	const {token} = useAuth();
+	const {classroomId} = useClassroom();
 	
-	// Test array of lessons
-	const lessons = [
-		{
-			name: "CSS technologies",
-			time: "08:30",
-			status: "done"
-		},
-		{
-			name: "HTML technologies",
-			time: "10:25",
-			status: "undone"
-		},
-		{
-			name: "JavaScript technologies",
-			time: "13:50",
-			status: "done"
-		},
-	];
-
+	const [startDate, setStartDate] = useState(moment().subtract(1, 'week').toDate());
+	const [endDate, setEndDate] = useState(moment().add(1, 'month').toDate());
+	const [days, setDays] = useState([]);
+	
+	const loadDays = async (startDate, endDate) => {
+		try {
+			const startDateFormatted = moment(startDate).format('YYYY-MM-DD');
+			const endDateFormatted = moment(endDate).format('YYYY-MM-DD');
+			
+			const response = await getLessonsAPI(token, classroomId, {startDate: startDateFormatted, endDate: endDateFormatted});
+			const data = await response.json();
+			
+			setDays(data);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+	
+	useEffect(() => {
+		loadDays(startDate, endDate);
+	}, []);
+	
 	return (
 		<div className="timetable">
-			<div className="timetable__week">
-				<Day name="Monday" date="05.20" lessons={lessons}/>
-				<Day name="Tuesday" date="05.20" lessons={lessons}/>
-				<Day name="Wednesday" date="05.20" lessons={lessons}/>
-				<Day name="Thursday" date="05.20" />
-				<Day name="Friday" date="05.20" />
-				<Day name="Sunday" date="05.20" lessons={lessons}/>
-				<Day name="Sunday" date="05.20" lessons={lessons}/>
+			<Search
+				loadDays={loadDays}
+				startDate={startDate}
+				setStartDate={setStartDate}
+				endDate={endDate}
+				setEndDate={setEndDate}
+			/>
+			<div className="timetable__days-wrapper">
+				{ days &&
+					days.map(day => {
+						return <Day key={day.date} day={day} />
+					})
+				}
 			</div>
-			<div className="timetable__week">
-				<Day name="Monday" date="05.20" lessons={lessons}/>
-				<Day name="Tuesday" date="05.20" lessons={lessons}/>
-				<Day name="Wednesday" date="05.20" lessons={lessons}/>
-				<Day name="Thursday" date="05.20" />
-				<Day name="Friday" date="05.20" />
-				<Day name="Sunday" date="05.20" lessons={lessons}/>
-				<Day name="Sunday" date="05.20" lessons={lessons}/>
-			</div>
+		
 		</div>
 	);
 }

@@ -1,9 +1,9 @@
 @use 'styles/variables' as *;
 
 .timetable {
-	&__week {
+	&__days-wrapper {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+		grid-template-columns: repeat(auto-fit, minmax(320px, auto));
 		column-gap: 4px;
 		row-gap: 8px;
 
@@ -12,6 +12,19 @@
 			padding-top: 20px;
 			border-top: 1px dashed rgba(0,0,0,.1);
 		}
+	}
 
+	&__search {
+		display: flex;
+		justify-content: center;
+		align-items: end;
+	}
+
+	&__date-input {
+		height: 50px;
+		width: 200px;
+		text-align: center;
+		font-size: 18px;
+		padding: 0;
 	}
 }
