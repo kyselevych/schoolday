@@ -1,8 +1,14 @@
 const Op = require('sequelize').Op;
 const moment = require('moment');
 
+const Classroom = require('../../models/classroomModel');
 const ClassroomLesson = require('../../models/classroomLessonModel');
+const ClassroomSolution = require('../../models/classroomSolutionModel');
+const User = require('../../models/userModel');
 const ApiError = require("../../error/ApiError");
+const generateDaysWithLessons = require("../../utils/generateDaysWithLessons");
+const putUserSolutionStatusToLesson = require("../../utils/putUserSolutionStatusToLesson");
+
 
 class LessonsController {
 	async createLesson(req, res) {
@@ -37,6 +43,8 @@ class LessonsController {
 			return next(ApiError.badRequest('Invalid format of dates'));
 		}
 		
+
+		
 		const lessons = await ClassroomLesson.findAll({
 			where: {
 				date: {
@@ -46,6 +54,50 @@ class LessonsController {
 		});
 		
 		return res.json({lessons});
+	}
+	
+	async getDaysList(req, res, next) {
+		const startDate = moment(req.body.startDate, 'YYYY-MM-DD', true);
+		const endDate = moment(req.body.endDate, 'YYYY-MM-DD', true);
+		
+		const isValidStartDate = startDate.isValid();
+		const isValidEndDate = endDate.isValid();
+		
+		if (!isValidStartDate || !isValidEndDate) {
+			return next(ApiError.badRequest('Invalid format of dates'));
+		}
+		
+		const startDateFormatted = startDate.format('YYYY-MM-DD');
+		const endDateFormatted = endDate.format('YYYY-MM-DD');
+		
+		try {
+			let lessons = await ClassroomLesson.findAll({
+				where: {
+					date: {
+						[Op.between]: [startDateFormatted, endDateFormatted]
+					},
+					classroomId: req.params.id
+				}
+			});
+			
+			const solutions = await ClassroomSolution.findAll({
+				where: {
+					lessonId: {
+						[Op.or]: lessons.map(lesson => lesson.id)
+					},
+					userId: req.user.id
+				}
+			})
+			
+			putUserSolutionStatusToLesson(lessons, solutions);
+
+			const formattedDays = await generateDaysWithLessons(startDate, endDate, lessons);
+			
+			return res.json(formattedDays);
+		} catch (err) {
+			console.log(err);
+			return next(ApiError.badRequest('Error loading'));
+		}
 	}
 	
 	async getLesson(req, res, next) {

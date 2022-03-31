@@ -28,7 +28,8 @@ router.get('/:id/members', checkMember, membersController.getMembers);
 router.get('/:id/settings', checkTeacher, settingsController.getSettings);
 router.put('/:id/settings', checkTeacher, settingsController.setSettings);
 
-router.get('/:id/lessons', checkMember, lessonsController.getLessons);
+router.post('/:id/lessons', checkMember, lessonsController.getLessons);
+router.post('/:id/formattedDays', checkMember, lessonsController.getDaysList);
 router.get('/:id/lesson/:lessonID', checkMember, checkLesson, lessonsController.getLesson);
 router.post('/:id/lesson', checkTeacher, lessonsController.createLesson);
 router.delete('/:id/lesson/:lessonID', checkTeacher, checkLesson, lessonsController.deleteLesson);
