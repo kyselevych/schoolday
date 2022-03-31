@@ -8,7 +8,8 @@ async function generateDaysWithLessons(startDate, endDate, lessonsList) {
 		const formattedIterableDate = iterableDate.format('YYYY-MM-DD');
 		
 		daysList.push({
-			date: iterableDate.format('MM.DD'),
+			date: iterableDate.format('YYYY-MM-DD'),
+			shortDate: iterableDate.format('MM.DD'),
 			name: iterableDate.format('dddd'),
 			lessons: findLessonsByDate(formattedIterableDate, lessonsList)
 		})

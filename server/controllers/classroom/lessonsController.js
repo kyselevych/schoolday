@@ -1,14 +1,11 @@
 const Op = require('sequelize').Op;
 const moment = require('moment');
 
-const Classroom = require('../../models/classroomModel');
 const ClassroomLesson = require('../../models/classroomLessonModel');
 const ClassroomSolution = require('../../models/classroomSolutionModel');
-const User = require('../../models/userModel');
 const ApiError = require("../../error/ApiError");
 const generateDaysWithLessons = require("../../utils/generateDaysWithLessons");
 const putUserSolutionStatusToLesson = require("../../utils/putUserSolutionStatusToLesson");
-
 
 class LessonsController {
 	async createLesson(req, res) {
@@ -42,9 +39,7 @@ class LessonsController {
 		if (!isValidStartDate || !isValidEndDate) {
 			return next(ApiError.badRequest('Invalid format of dates'));
 		}
-		
 
-		
 		const lessons = await ClassroomLesson.findAll({
 			where: {
 				date: {
@@ -72,6 +67,7 @@ class LessonsController {
 		
 		try {
 			let lessons = await ClassroomLesson.findAll({
+				order: ['time'],
 				where: {
 					date: {
 						[Op.between]: [startDateFormatted, endDateFormatted]

@@ -14,7 +14,10 @@ const ClassroomLesson = sequelize.define('classroom_lesson', {
 	},
 	time: {
 		type: DataTypes.TIME,
-		allowNull: false
+		allowNull: false,
+		get() {
+			return this.getDataValue('time').substring(0,5);
+		}
 	},
 	name: {
 		type: DataTypes.STRING,
