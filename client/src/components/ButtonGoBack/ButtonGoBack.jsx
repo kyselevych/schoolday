@@ -1,16 +1,22 @@
 import React from "react";
 import './ButtonGoBack.scss';
 
+import {useNavigate} from "react-router-dom";
+
 function ButtonGoBack(props) {
-	
 	const {
 		text = "Go back",
-		onClick = undefined,
-		href = '#'
+		onClick = goBack
 	} = props;
 	
+	const navigate = useNavigate();
+	
+	function goBack() {
+		navigate(-1);
+	}
+	
     return (
-	    <a href={href} className="button-go-back">{text}</a>
+	    <div className="button-go-back" onClick={onClick}>{text}</div>
     );
 }
 
