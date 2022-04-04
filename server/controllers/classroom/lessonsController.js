@@ -8,7 +8,7 @@ const generateDaysWithLessons = require("../../utils/generateDaysWithLessons");
 const putUserSolutionStatusToLesson = require("../../utils/putUserSolutionStatusToLesson");
 
 class LessonsController {
-	async createLesson(req, res) {
+	async createLesson(req, res, next) {
 		const {
 			name,
 			date,
@@ -17,14 +17,25 @@ class LessonsController {
 			isHomework
 		} = req.body;
 		
-		const lesson = await ClassroomLesson.create({
-			name,
-			date,
-			time,
-			description,
-			isHomework,
-			classroomId: req.params.id
-		})
+		const formattedDate = moment(date).format('YYYY-MM-DD');
+		const isValideDate = moment(formattedDate, 'YYYY-MM-DD', true).isValid();
+		
+		if (!isValideDate) {
+			return next(ApiError.badRequest('Invalid format of dates'));
+		}
+		
+		try {
+			const lesson = await ClassroomLesson.create({
+				name,
+				date: formattedDate,
+				time,
+				description,
+				isHomework,
+				classroomId: req.params.id
+			});
+		} catch (err) {
+			return next(ApiError.badRequest('Failed to create lesson'));
+		}
 		
 		return res.json({message: `Lesson ${name} successful created`});
 	}
