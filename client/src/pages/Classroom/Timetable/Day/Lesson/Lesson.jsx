@@ -11,19 +11,21 @@ function Lesson(props) {
 	let statusLessonClass = "";
 	const statusClassDone = "timetable__lesson--done";
 	const statusClassNotDone = "timetable__lesson--undone";
-
-	switch (lesson.status) {
-		case "sent":
-		case "rated": {
-			statusLessonClass = statusClassDone;
-			break;
-		}
-		case "unsent": {
-			statusLessonClass = statusClassNotDone;
-			break;
-		}
-		default: {
-			statusLessonClass = "";
+	
+	if (lesson.isHomework) {
+		switch (lesson.status) {
+			case "sent":
+			case "rated": {
+				statusLessonClass = statusClassDone;
+				break;
+			}
+			case "unsent": {
+				statusLessonClass = statusClassNotDone;
+				break;
+			}
+			default: {
+				statusLessonClass = "";
+			}
 		}
 	}
 
