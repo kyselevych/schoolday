@@ -41,3 +41,14 @@ export async function getLessonsAPI(token, classroomId, values) {
 		body: JSON.stringify(values)
 	})
 }
+
+export async function createLessonAPI(token, classroomId, values) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson`,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(values)
+	})
+}

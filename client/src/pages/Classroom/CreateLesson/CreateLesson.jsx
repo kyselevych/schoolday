@@ -4,17 +4,45 @@ import './CreateLesson.scss';
 import {LabelForm, ButtonDecision, Checkbox, ButtonGoBack} from "components";
 import TimeField from "react-simple-timefield";
 import {useFormik} from "formik";
+import DatePicker from "react-datepicker";
+import {useNavigate, useParams} from "react-router-dom";
+import {createLessonAPI} from "http/classroomAPI";
+import useAuth from "hook/useAuth";
+import {CLASSROOMS_PATH} from "utils/pathConsts";
+import useNotification from "hook/useNotification";
+
 
 function CreateLesson() {
+	const params = useParams();
+	const {token} = useAuth();
+	const {notification} = useNotification();
+	const navigate = useNavigate();
+	
+	const onSubmit = async (values) => {
+		const response = await createLessonAPI(token, params.id, values);
+		const data = await response.json();
+		
+		if (response.status === 200) {
+			navigate(-1);
+			notification('Lesson successfully created');
+			return;
+		}
+		
+		notification(data.message || 'Unknown error', 'negative');
+	}
 	
 	function validate(values) {
 		const error = {};
 		
-		if (!values.lessonName) {
-			error.lessonName = "Required field";
+		if (!values.name) {
+			error.name = "Required field";
 		}
 		if (!values.time) {
 			error.time = "Required field";
+		}
+		
+		if(!values.date) {
+			error.date = "Required field";
 		}
 		
 		return error;
@@ -22,15 +50,14 @@ function CreateLesson() {
 	
 	const formik = useFormik({
 		initialValues: {
-			lessonName: '',
+			name: '',
 			description: '',
 			time: '',
+			date: new Date(params.date) || '',
 			isHomework: false
 		},
 		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
+		onSubmit
 	});
 	
 	return (
@@ -44,14 +71,14 @@ function CreateLesson() {
 					<LabelForm labelText="Name of lesson">
 						<input
 							className="input"
-							name="lessonName"
+							name="name"
 							placeholder="Technologies"
 							onChange={formik.handleChange}
-							value={formik.values.lessonName}
+							value={formik.values.name}
 							onBlur={formik.handleBlur}
 						/>
-						{(formik.touched.lessonName && formik.errors.lessonName) &&
-							<span className="form__label-error">{formik.errors.lessonName}</span>
+						{(formik.touched.name && formik.errors.name) &&
+							<span className="form__label-error">{formik.errors.name}</span>
 						}
 					</LabelForm>
 					<LabelForm labelText="Description">
@@ -76,15 +103,25 @@ function CreateLesson() {
 								<span className="form__label-error">{formik.errors.time}</span>
 							}
 						</LabelForm>
-						<LabelForm labelText="It's home work" labelPosition="end">
-							<Checkbox
-								name="isHomework"
-								onChange={formik.handleChange}
-								value={formik.values.isHomework}
-								onBlur={formik.handleBlur}
+						<LabelForm labelText="Date">
+							<DatePicker
+								className="input"
+								onChange={(data) => formik.setFieldValue('date', data)}
+								selected={formik.values.date}
 							/>
+							{(formik.touched.date && formik.errors.date) &&
+								<span className="form__label-error">{formik.errors.date}</span>
+							}
 						</LabelForm>
 					</div>
+					<LabelForm labelText="It's home work" labelPosition="end">
+						<Checkbox
+							name="isHomework"
+							onChange={formik.handleChange}
+							value={formik.values.isHomework}
+							onBlur={formik.handleBlur}
+						/>
+					</LabelForm>
 					<ButtonDecision>Create</ButtonDecision>
 				</form>
 			</article>
