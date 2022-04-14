@@ -32,31 +32,37 @@ class MembersController {
 	}
 	
 	async removeMember(req, res, next) {
-		const candidate = await User.findOne({where: {
-				email: req.body.email
-		}});
-		
-		if (!candidate) {
-			return next(ApiError.forbidden('User does not exist'));
-		}
-		if (candidate.id === req.user.id) {
-			return next(ApiError.forbidden("You can't remove yourself"));
-		}
-		
-		const candidateIsMemberClassroom = await getClassroomMember(candidate.id, req.params.id);
-		
-		if (!candidateIsMemberClassroom) {
-			return next(ApiError.forbidden('The user is not a member of the class'));
-		}
-		
-		await ClassroomMember.destroy({
-			where: {
-				"userId": candidate.id,
-				"classroomId": req.params.id
+		try {
+			const candidate = await User.findOne({where: {
+					email: req.body.email
+			}});
+			
+			if (!candidate) {
+				return next(ApiError.forbidden('User does not exist'));
 			}
-		})
-		
-		return res.json({message: 'User successfully removed from classroom'});
+			if (candidate.id === req.user.id) {
+				return next(ApiError.forbidden("You can't remove yourself"));
+			}
+			
+			const candidateIsMemberClassroom = await getClassroomMember(candidate.id, req.params.id);
+			
+			if (!candidateIsMemberClassroom) {
+				return next(ApiError.forbidden('The user is not a member of the class'));
+			}
+			
+			await ClassroomMember.destroy({
+				where: {
+					"userId": candidate.id,
+					"classroomId": req.params.id
+				}
+			})
+			
+			return res.json({message: 'User successfully removed from classroom'});
+		}
+		catch (err) {
+			console.log(err);
+			return next(ApiError.forbidden("Error"));
+		}
 	}
 	
 	async getMembers(req, res, next) {
@@ -68,7 +74,7 @@ class MembersController {
 			},
 			include: [{
 				model: User,
-				attributes: ['id', 'firstname', 'lastname']
+				attributes: ['id', 'firstname', 'lastname', 'email']
 			}]
 		})
 		
@@ -80,11 +86,10 @@ class MembersController {
 			},
 			include: [{
 				model: User,
-				attributes: ['id', 'firstname', 'lastname']
+				attributes: ['id', 'firstname', 'lastname', 'email']
 			}]
 		})
 
-		
 		return res.json({
 			"teachers": teachers,
 			"students": students
