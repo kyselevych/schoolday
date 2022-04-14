@@ -70,7 +70,7 @@ export async function removeMemberAPI(token, classroomId, email) {
 			'Content-Type': 'application/json',
 			'Authorization': token
 		},
-		body: JSON.stringify(email)
+		body: JSON.stringify({email: email})
 	})
 }
 

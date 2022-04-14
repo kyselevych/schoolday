@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from "react";
 import './Members.scss';
 
-import {ButtonAdd, notification} from "components";
+import {ButtonAdd} from "components";
 import Member from "./Member/Member";
 import {getMembersAPI, removeMemberAPI} from "http/classroomAPI";
 import useAuth from "hook/useAuth";
 import useClassroom from "hook/useClassroom";
+import useNotification from "hook/useNotification";
 
 function Members() {
 	const [teachersList, setTeachersList] = useState(null);
@@ -13,19 +14,21 @@ function Members() {
 	
 	const {token} = useAuth();
 	const {classroomId, userRole} = useClassroom();
+	const {notification} = useNotification();
 	
-	/*const removeMember = async (email) => {
+	const removeMember = useCallback(async (email) => {
 		const response = await removeMemberAPI(token, classroomId, email);
-		const data = await response.json();
-		
+	
 		if (response.status === 200) {
-			
 			notification('User successfully removed')
+			await loadMembers();
+			
 			return;
 		}
 		
+		const data = await response.json();
 		notification(data.message || 'Unknown error', 'negative');
-	};*/
+	}, []);
 
 	const loadMembers = useCallback(async () => {
 		const response = await getMembersAPI(token, classroomId);
@@ -42,7 +45,6 @@ function Members() {
 	}, []);
 	
 	useEffect(() => {
-		console.log(studentsList)
 		loadMembers();
 	}, [])
 
@@ -60,11 +62,14 @@ function Members() {
 						{
 							studentsList?.map(person => {
 								person = person.user;
-								console.log(person)
+								
 								return (
 									<Member
 										key={person.id}
 										person={person}
+										removeMember={removeMember}
+										isTeacher={userRole === 'TEACHER'}
+										loadMembers={loadMembers}
 									/>
 								)
 							})
@@ -77,7 +82,15 @@ function Members() {
 						{
 							teachersList?.map(person => {
 								person = person.user;
-								return <Member key={person.id} person={person}/>;
+								return (
+									<Member
+										key={person.id}
+										person={person}
+										removeMember={removeMember}
+										isTeacher={userRole === 'TEACHER'}
+										loadMembers={loadMembers}
+									/>
+								)
 							})
 						}
 					</ul>
