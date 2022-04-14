@@ -8,10 +8,12 @@ const getClassroomMember = require('../../utils/getClassroomMember');
 class MembersController {
 	
 	async addMember(req, res, next) {
-		const candidate = await User.findOne({where: {
-			email: req.body.email
-		}});
-
+		const candidate = await User.findOne({
+			where: {
+				email: req.body.email
+			}
+		});
+		
 		if (!candidate) {
 			return next(ApiError.forbidden('User does not exist'));
 		}
@@ -25,7 +27,7 @@ class MembersController {
 		await ClassroomMember.create({
 			"userId": candidate.id,
 			"classroomId": req.params.id,
-			"role": req.body.role
+			"role": req.body.role.toUpperCase()
 		})
 		
 		return res.json({message: 'User successfully added to classroom'});
@@ -33,9 +35,12 @@ class MembersController {
 	
 	async removeMember(req, res, next) {
 		try {
-			const candidate = await User.findOne({where: {
-					email: req.body.email
-			}});
+			const candidate = await User.findOne(
+				{
+					where: {
+						email: req.body.email
+					}
+				});
 			
 			if (!candidate) {
 				return next(ApiError.forbidden('User does not exist'));
@@ -58,8 +63,7 @@ class MembersController {
 			})
 			
 			return res.json({message: 'User successfully removed from classroom'});
-		}
-		catch (err) {
+		} catch (err) {
 			console.log(err);
 			return next(ApiError.forbidden("Error"));
 		}
@@ -89,7 +93,7 @@ class MembersController {
 				attributes: ['id', 'firstname', 'lastname', 'email']
 			}]
 		})
-
+		
 		return res.json({
 			"teachers": teachers,
 			"students": students
