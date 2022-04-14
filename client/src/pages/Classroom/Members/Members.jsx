@@ -14,7 +14,7 @@ function Members() {
 	const {token} = useAuth();
 	const {classroomId, userRole} = useClassroom();
 	
-	const removeMember = async (email) => {
+	/*const removeMember = async (email) => {
 		const response = await removeMemberAPI(token, classroomId, email);
 		const data = await response.json();
 		
@@ -25,7 +25,7 @@ function Members() {
 		}
 		
 		notification(data.message || 'Unknown error', 'negative');
-	};
+	};*/
 
 	const loadMembers = useCallback(async () => {
 		const response = await getMembersAPI(token, classroomId);
@@ -42,8 +42,9 @@ function Members() {
 	}, []);
 	
 	useEffect(() => {
+		console.log(studentsList)
 		loadMembers();
-	}, [loadMembers])
+	}, [])
 
 	return (
 		<>
@@ -64,9 +65,6 @@ function Members() {
 									<Member
 										key={person.id}
 										person={person}
-										isTeacher={userRole === "TEACHER"}
-										removeMember={removeMember}
-										loadMembers={loadMembers}
 									/>
 								)
 							})

@@ -1,11 +1,21 @@
 import React from "react";
 import './AddMember.scss';
 
-import {LabelForm, ButtonDecision,ButtonGoBack} from "components";
+import {LabelForm, ButtonDecision, ButtonGoBack, notification} from "components";
 
 import {useFormik} from "formik";
+import {useNavigate} from "react-router-dom";
+import {addMemberAPI} from "http/classroomAPI";
+import useClassroom from "hook/useClassroom";
+import useAuth from "hook/useAuth";
+import useNotification from "hook/useNotification";
 
 function AddMember() {
+	const {notification} = useNotification();
+	const navigate = useNavigate();
+	const {classroomId} = useClassroom()
+	const {token} = useAuth();
+	
 	function validate(values) {
 		const errors = {};
 		
@@ -20,15 +30,28 @@ function AddMember() {
 		return errors;
 	}
 	
+	const onSubmit = async (values) => {
+		values.role = values.role.toUpperCase();
+		
+		const response = await addMemberAPI(token, classroomId, values);
+		const data = await response.json();
+		
+		if (response.status === 200) {
+			notification(data.message || 'You successful added new member');
+			navigate(-1);
+			return;
+		}
+
+		notification(data.message || 'Unknown error', 'negative');
+	}
+	
 	const formik = useFormik({
 		initialValues: {
 			email: '',
 			role: 'student'
 		},
 		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values))
-		}
+		onSubmit
 	})
 	
 	return (

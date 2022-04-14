@@ -73,3 +73,14 @@ export async function removeMemberAPI(token, classroomId, email) {
 		body: JSON.stringify(email)
 	})
 }
+
+export async function addMemberAPI(token, classroomId, values) {
+	return await fetch(baseUrl + `classroom/${classroomId}/member`,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(values)
+	})
+}
