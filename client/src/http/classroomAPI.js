@@ -52,3 +52,24 @@ export async function createLessonAPI(token, classroomId, values) {
 		body: JSON.stringify(values)
 	})
 }
+
+export async function getMembersAPI(token, classroomId) {
+	return await fetch(baseUrl + `classroom/${classroomId}/members`,{
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		}
+	})
+}
+
+export async function removeMemberAPI(token, classroomId, email) {
+	return await fetch(baseUrl + `classroom/${classroomId}/member`,{
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(email)
+	})
+}
