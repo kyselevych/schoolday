@@ -8,8 +8,8 @@ import DatePicker from "react-datepicker";
 import {useNavigate, useParams} from "react-router-dom";
 import {createLessonAPI} from "http/classroomAPI";
 import useAuth from "hook/useAuth";
-import {CLASSROOMS_PATH} from "utils/pathConsts";
 import useNotification from "hook/useNotification";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 
 function CreateLesson() {
@@ -61,7 +61,7 @@ function CreateLesson() {
 	});
 	
 	return (
-		<>
+		<AnimatedPage>
 			<div className="container--narrow">
 				<ButtonGoBack />
 			</div>
@@ -125,7 +125,7 @@ function CreateLesson() {
 					<ButtonDecision>Create</ButtonDecision>
 				</form>
 			</article>
-		</>
+		</AnimatedPage>
 	);
 }
 

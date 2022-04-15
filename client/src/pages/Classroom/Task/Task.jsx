@@ -5,13 +5,14 @@ import TaskForm from "./TaskForm/TaskForm";
 import TaskDescription from "./TaskDescription/TaskDescription";
 import StudentsList from "./StudentsList/StudentsList";
 
-import {ButtonGoBack} from "components";
+import {ButtonGoBack, Loading} from "components";
 import useClassroom from "hook/useClassroom";
 import useNotification from "hook/useNotification";
 import {getLessonAPI} from "http/classroomAPI";
 import {useNavigate, useParams} from "react-router-dom";
 import useAuth from "hook/useAuth";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 function Task() {
 	const {notification} = useNotification();
@@ -47,17 +48,17 @@ function Task() {
 		loadLesson();
 	}, [])
 	
-	if (!lesson) return "Loading...";
+	if (!lesson) return <Loading/>;
 	
 	return (
-		<>
+		<AnimatedPage>
 			<div className="container--narrow">
 				<ButtonGoBack/>
 			</div>
 			<TaskDescription lesson={lesson}/>
 			{isOpenTaskForm && <TaskForm />}
 			<StudentsList/>
-		</>
+		</AnimatedPage>
 	);
 }
 

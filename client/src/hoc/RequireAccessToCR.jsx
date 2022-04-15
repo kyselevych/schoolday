@@ -3,6 +3,7 @@ import {Navigate, useParams} from "react-router-dom";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
 import useClassroom from "hook/useClassroom";
 import useNotification from "hook/useNotification";
+import {Loading} from "components";
 
 function RequireAccessToCR({children}){
 	const {classroom, loadClassroom, isLoaded, notificationMessage} = useClassroom();
@@ -14,7 +15,7 @@ function RequireAccessToCR({children}){
 	}, [])
 	
 	if (!isLoaded) {
-		return <div>LOADING...</div>;
+		return <Loading/>;
 	}
 	
 	if (!classroom) {

@@ -10,3 +10,5 @@ export {default as Checkbox} from './Checkbox/Checkbox';
 export {default as ButtonGoBack} from './ButtonGoBack/ButtonGoBack';
 export {default as AppRouter} from './AppRouter/AppRouter';
 export {default as notification} from './Notification/Notification';
+export {default as AnimatePage} from './AnimatePage/AnimatePage';
+export {default as Loading} from './Loading/Loading';

@@ -1,6 +1,5 @@
-import React from 'react';
-import {motion} from "framer-motion/dist/framer-motion";
-import './Loading.sass';
+import React from "react";
+import { motion } from "framer-motion/dist/framer-motion";
 
 const animations = {
 	initial: { opacity: 0 },
@@ -8,19 +7,18 @@ const animations = {
 	exit: { opacity: 0 }
 };
 
-function Loading() {
+const AnimatedPage = ({ children }) => {
 	return (
 		<motion.div
-			className="loading"
 			variants={animations}
 			initial="initial"
 			animate="animate"
 			exit="exit"
-			transition={{ duration: 0.2 }}
+			transition={{ duration: 0.5 }}
 		>
-		
+			{children}
 		</motion.div>
 	);
-}
+};
 
-export default Loading;
+export default AnimatedPage;

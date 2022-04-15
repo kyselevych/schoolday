@@ -7,6 +7,7 @@ import {getMembersAPI, removeMemberAPI} from "http/classroomAPI";
 import useAuth from "hook/useAuth";
 import useClassroom from "hook/useClassroom";
 import useNotification from "hook/useNotification";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 function Members() {
 	const [teachersList, setTeachersList] = useState(null);
@@ -48,7 +49,7 @@ function Members() {
 	}, [])
 
 	return (
-		<>
+		<AnimatedPage>
 			{ userRole === "TEACHER" &&
 				<div className="container--narrow">
 					<ButtonAdd className="classroom__members__button-add" to="../add-member">Add member</ButtonAdd>
@@ -59,7 +60,7 @@ function Members() {
 					<h2>Students</h2>
 					<ul className="classroom__members-list">
 						{
-							studentsList?.map(person => {
+							studentsList?.map((person, i) => {
 								person = person.user;
 								
 								return (
@@ -69,6 +70,7 @@ function Members() {
 										removeMember={removeMember}
 										isTeacher={userRole === 'TEACHER'}
 										loadMembers={loadMembers}
+										custom={i}
 									/>
 								)
 							})
@@ -79,7 +81,7 @@ function Members() {
 					<h2>Teachers</h2>
 					<ul className="classroom__members-list">
 						{
-							teachersList?.map(person => {
+							teachersList?.map((person, i) => {
 								person = person.user;
 								return (
 									<Member
@@ -88,6 +90,7 @@ function Members() {
 										removeMember={removeMember}
 										isTeacher={userRole === 'TEACHER'}
 										loadMembers={loadMembers}
+										custom={i}
 									/>
 								)
 							})
@@ -95,7 +98,7 @@ function Members() {
 					</ul>
 				</article>
 			</section>
-		</>
+		</AnimatedPage>
 	);
 }
 

@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
 import useAuth from "hook/useAuth";
 import useNotification from "hook/useNotification";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 function CreateLesson() {
 	const navigate = useNavigate();
@@ -51,7 +52,7 @@ function CreateLesson() {
 	});
 	
 	return (
-		<>
+		<AnimatedPage>
 			<div className="container--narrow classroom-create__btn-go-back">
 				<ButtonGoBack />
 			</div>
@@ -74,7 +75,7 @@ function CreateLesson() {
 					<ButtonDecision>Create</ButtonDecision>
 				</form>
 			</article>
-		</>
+		</AnimatedPage>
 	);
 }
 

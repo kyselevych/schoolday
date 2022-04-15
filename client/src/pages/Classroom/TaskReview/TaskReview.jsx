@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './TaskReview.scss';
 
-import {ButtonGoBack} from "components";
+import {ButtonGoBack, Loading} from "components";
 import Grade from "./Grade/Grade";
 import Info from "./Info/Info";
 import useClassroom from "hook/useClassroom";
@@ -10,6 +10,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {CLASSROOMS_PATH} from "utils/pathConsts";
 import {getSolutionAPI} from "http/classroomAPI";
 import useAuth from "hook/useAuth";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 function TaskReview() {
 	const {userRole, classroomId} = useClassroom();
@@ -39,7 +40,7 @@ function TaskReview() {
 		loadSolution();
 	}, [])
 	
-	if (!solution) return "Loading..";
+	if (!solution) return <Loading/>;
 	if (userRole !== "TEACHER") {
 		navigate(CLASSROOMS_PATH);
 		notification("You are not teacher", 'negative');
@@ -47,13 +48,13 @@ function TaskReview() {
 	}
 	
 	return (
-		<>
+		<AnimatedPage>
 			<div className="container--narrow">
 				<ButtonGoBack/>
 			</div>
 			<Info solution={solution}/>
 			<Grade/>
-		</>
+		</AnimatedPage>
 	);
 }
 

@@ -44,3 +44,12 @@ $color-bg-name-class: #ff8929;
 		}
 	}
 }
+
+@media screen and (max-width: 1500px) {
+	.classroom {
+		&__name-classroom {
+			padding: 20px;
+			font-size: 14px;
+		}
+	}
+}

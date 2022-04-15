@@ -2,12 +2,13 @@ import React from 'react';
 import {Navigate} from "react-router-dom";
 import useAuth from "hook/useAuth";
 import {LOGIN_PATH} from "utils/pathConsts";
+import {Loading} from "components";
 
 function RequireAuth({children}){
 	const {user, isLoaded} = useAuth();
 	
 	if (!isLoaded) {
-		return <div>LOADING...</div>;
+		return <Loading/>;
 	}
 	
 	if (!user) {

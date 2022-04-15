@@ -12,6 +12,17 @@ body {
 	font-size: 16px;
 	background: $bg-color;
 	color: $dark-color;
+
+	&::-webkit-scrollbar {
+		width: 7px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: $dark-color;
+		border-radius: 5px;
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background: $accent-color;
+	}
 }
 
 .container {
@@ -61,3 +72,18 @@ body {
 	align-items: center;
 }
 
+@media screen and (max-width: 1500px) {
+	body {
+		font-size: 12px;
+	}
+	.container {
+		width: 1170px;
+	}
+}
+
+@media screen and (max-width: 1300px) {
+
+	.container {
+		width: 1000px;
+	}
+}

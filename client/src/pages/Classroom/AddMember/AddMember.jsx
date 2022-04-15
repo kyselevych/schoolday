@@ -1,7 +1,7 @@
 import React from "react";
 import './AddMember.scss';
 
-import {LabelForm, ButtonDecision, ButtonGoBack, notification} from "components";
+import {LabelForm, ButtonDecision, ButtonGoBack} from "components";
 
 import {useFormik} from "formik";
 import {useNavigate} from "react-router-dom";
@@ -9,6 +9,7 @@ import {addMemberAPI} from "http/classroomAPI";
 import useClassroom from "hook/useClassroom";
 import useAuth from "hook/useAuth";
 import useNotification from "hook/useNotification";
+import AnimatedPage from "components/AnimatePage/AnimatePage";
 
 function AddMember() {
 	const {notification} = useNotification();
@@ -55,7 +56,7 @@ function AddMember() {
 	})
 	
 	return (
-		<>
+		<AnimatedPage>
 			<div className="container--narrow">
 				<ButtonGoBack />
 			</div>
@@ -90,7 +91,7 @@ function AddMember() {
 					<ButtonDecision>Create</ButtonDecision>
 				</form>
 			</article>
-		</>
+		</AnimatedPage>
 	);
 }
 
