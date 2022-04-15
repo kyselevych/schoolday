@@ -57,10 +57,6 @@ function StudentsList() {
 		notification(data.message || 'Unknown error', 'negative');
 	}
 	
-	function routeToReviewTask() {
-		navigate('review');
-	}
-	
 	useEffect(() => {
 		loadStudents();
 	}, []);
@@ -74,7 +70,7 @@ function StudentsList() {
 						return (
 							<li
 								className="student-task-list__item layout-flex__space-between__align-center"
-								onClick={userRole === "TEACHER" ? routeToReviewTask : null}
+								onClick={userRole === "TEACHER" ? () => navigate(`solution/${student.id}`) : null}
 								key={student.user.id}
 							>
 								<span className="student-task-list__name">{student.user.firstname} {student.user.lastname}</span>

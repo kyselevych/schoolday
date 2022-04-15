@@ -115,3 +115,24 @@ export async function getSolutionsListAPI(token, classroomId, lessonId) {
 		}
 	})
 }
+
+export async function getSolutionAPI(token, classroomId, lessonId, solutionId) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson/${lessonId}/solution/${solutionId}`,{
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		}
+	})
+}
+
+export async function estimateSolutionAPI(token, classroomId, lessonId, solutionId, values) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson/${lessonId}/solution/${solutionId}/estimate`,{
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(values)
+	})
+}

@@ -1,15 +1,20 @@
 import React from "react";
 import './Info.scss';
+import moment from "moment";
 
-function Info() {
+function Info(props) {
+	const {solution} = props;
+	
+	const formattedDate = moment(solution.date, "YYYY-MM-DD").format("MM.DD");
+	const formattedTime = moment(solution.time, "HH:mm:ss").format("HH:mm");
 	
 	return (
 		<article className="container--narrow container--styled-content">
 			<div className="layout-flex__space-between__align-center">
-				<h2>Volodymyr Kyselevych</h2>
-				<span>15.20 08:30</span>
+				<h2>{solution.user.firstname} {solution.user.lastname}</h2>
+				<span>{formattedDate} {formattedTime}</span>
 			</div>
-			<p className="task__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto asperiores beatae blanditiis consequuntur dicta dignissimos, dolor error excepturi facilis id modi omnis quo rem veniam voluptatem? Molestias, qui!</p>
+			<p className="task__description">{solution.text}</p>
 		</article>
 	);
 }
