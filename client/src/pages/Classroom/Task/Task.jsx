@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Task.scss';
 
 import TaskForm from "./TaskForm/TaskForm";
@@ -6,41 +6,57 @@ import TaskDescription from "./TaskDescription/TaskDescription";
 import StudentsList from "./StudentsList/StudentsList";
 
 import {ButtonGoBack} from "components";
+import useClassroom from "hook/useClassroom";
+import useNotification from "hook/useNotification";
+import {getLessonAPI} from "http/classroomAPI";
+import {useNavigate, useParams} from "react-router-dom";
+import useAuth from "hook/useAuth";
+import {CLASSROOMS_PATH} from "utils/pathConsts";
 
 function Task() {
+	const {notification} = useNotification();
+	const {classroomId, userRole} = useClassroom();
+	const {token} = useAuth();
+	const params = useParams();
+	const navigate = useNavigate();
 	
-	const students = [
-		{
-			name: "John Lehnon",
-			grade: 80,
-			dateSend: "20.05.2022",
-			timeSend: "15:30",
-			status: "sent"
-		},
-		{
-			name: "David Gilmor",
-			grade: 40,
-			dateSend: "12.02.2022",
-			timeSend: "12:31",
-			status: "rated"
-		},
-		{
-			name: "Kurt Cobain",
-			grade: 73,
-			dateSend: "21.10.2022",
-			timeSend: "13:55",
-			status: "unsent"
-		},
-	]
+	const [lesson, setLesson] = useState(null);
+	const [isOpenTaskForm, setIsOpenTaskForm] = useState(false);
+	
+	const loadLesson = async () => {
+		const response = await getLessonAPI(token, classroomId, params.taskId);
+		const data = await response.json();
+		const lesson = data.lesson;
+		
+		if (response.status === 200) {
+			setLesson(lesson);
+			
+			if (userRole === "TEACHER") return;
+			if (lesson.isHomework) setIsOpenTaskForm(true);
+			
+			return;
+		}
+		
+		navigate(CLASSROOMS_PATH);
+		notification(data.message || 'Unknown error', 'negative');
+		
+		return lesson;
+	}
+	
+	useEffect(() => {
+		loadLesson();
+	}, [])
+	
+	if (!lesson) return "Loading...";
 	
 	return (
 		<>
 			<div className="container--narrow">
-				<ButtonGoBack />
+				<ButtonGoBack/>
 			</div>
-			<TaskDescription />
-			<TaskForm />
-			<StudentsList students={students}/>
+			<TaskDescription lesson={lesson}/>
+			{isOpenTaskForm && <TaskForm />}
+			<StudentsList/>
 		</>
 	);
 }

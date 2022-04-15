@@ -3,16 +3,35 @@ import './TaskForm.scss';
 
 import {LabelForm, ButtonDecision} from "components";
 import {useFormik} from "formik";
+import {sendSolutionAPI} from "http/classroomAPI";
+import useNotification from "hook/useNotification";
+import useAuth from "hook/useAuth";
+import useClassroom from "hook/useClassroom";
+import {useParams} from "react-router-dom";
 
 function TaskForm() {
+	const {notification} = useNotification();
+	const {token} = useAuth();
+	const {classroomId} = useClassroom();
+	const {taskId} = useParams();
+	
+	const onSubmit = async (values) => {
+		const response = await sendSolutionAPI(token, classroomId, taskId, values);
+		const data = await response.json();
+		
+		if (response.status === 200) {
+			notification(data.message || 'You successful added new member');
+			return;
+		}
+
+		notification(data.message || 'Unknown error', 'negative');
+	}
 	
 	const formikSendTask = useFormik({
 		initialValues: {
-			textTask: ''
+			text: ''
 		},
-		onSubmit: values => {
-			alert(JSON.stringify(values));
-		}
+		onSubmit
 	});
 	
 	return (
@@ -22,10 +41,10 @@ function TaskForm() {
 				<LabelForm labelText="Text">
 						<textarea
 							className="textarea"
-							name={'textTask'}
+							name="text"
 							onChange={formikSendTask.handleChange}
 							onBlur={formikSendTask.handleBlur}
-							value={formikSendTask.values.textTask}
+							value={formikSendTask.values.text}
 						>
 						</textarea>
 				</LabelForm>

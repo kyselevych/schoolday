@@ -41,11 +41,10 @@ function Members() {
 		}
 
 		notification(data.message || 'Unknown error', 'negative');
-
 	}, []);
 	
 	useEffect(() => {
-		loadMembers();
+		loadMembers()
 	}, [])
 
 	return (
@@ -95,7 +94,6 @@ function Members() {
 						}
 					</ul>
 				</article>
-				
 			</section>
 		</>
 	);

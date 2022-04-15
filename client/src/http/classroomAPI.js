@@ -84,3 +84,34 @@ export async function addMemberAPI(token, classroomId, values) {
 		body: JSON.stringify(values)
 	})
 }
+
+export async function getLessonAPI(token, classroomId, lessonId) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson/${lessonId}`,{
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		}
+	})
+}
+
+export async function sendSolutionAPI(token, classroomId, lessonId, values) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson/${lessonId}/solution`,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify(values)
+	})
+}
+
+export async function getSolutionsListAPI(token, classroomId, lessonId) {
+	return await fetch(baseUrl + `classroom/${classroomId}/lesson/${lessonId}/solutions`,{
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		}
+	})
+}

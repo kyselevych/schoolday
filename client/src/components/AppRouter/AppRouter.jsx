@@ -41,8 +41,8 @@ const AppRouter = () => {
 					</Route>
 					<Route path="members" element={<Members/>}/>
 					<Route path="settings" element={<Settings/>}/>
-					<Route path="task/:task" element={<Task/>}/>
-					<Route path="task-review" element={<TaskReview/>}/>
+					<Route path="task/:taskId" element={<Task/>}/>
+					<Route path="task/:taskId/review" element={<TaskReview/>}/>
 				</Route>
 			</Route>
 		</Routes>
